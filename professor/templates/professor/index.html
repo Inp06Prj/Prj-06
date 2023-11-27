@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>덕북희 - 교수자 스케줄 등록 페이지</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'single_pages/assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'single_pages/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'single_pages/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'single_pages/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'single_pages/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'single_pages/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'single_pages/assets/css/style.css' %}" rel="stylesheet">
+  <link href="{% static '/schedule/lib/fullcalendar-5.10.1/main.css' %}" rel='stylesheet' />
+  <script src="{% static '/schedule/lib/fullcalendar-5.10.1/main.js' %}"></script>
+  <script src="{% static '/schedule/lib/util.js' %}"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var calendarEl = document.getElementById('calendar');
+
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+        },
+        initialDate: "{{ today_ymd }}",
+        editable: true,
+        navLinks: true,
+        dayMaxEvents: true,
+        selectable: true,
+        timeFormat: 'h:mm a', // 시간 형식을 변경
+
+
+
+      select: function (event) {
+              let titleOptions = ['수업', '점심', '출장', '회의', '귀가']; // Add your desired title options
+
+              // Use a dropdown for the title input
+              let inputString = prompt("스케줄 제목 입력 : ", titleOptions[0]);
+              if (inputString !== null && inputString.trim() !== "") {
+                // Show time input prompts continuously
+                let selectedDate = event.startStr;
+
+                function getTimeInput() {
+                  let startTime = prompt(`시작 시간 입력 (HH:mm) for ${selectedDate}:`);
+                  let endTime = prompt(`끝나는 시간 입력 (HH:mm) for ${selectedDate}:`);
+
+                  // Parse the input to create a Date object
+                  startTime = new Date(`${selectedDate.split('T')[0]}T${startTime}`);
+                  endTime = new Date(`${selectedDate.split('T')[0]}T${endTime}`);
+
+                  // Check if start and end times are provided and valid
+                  if (!isNaN(startTime.getTime()) && !isNaN(endTime.getTime())) {
+                    const xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function () {
+                      // Rest of your existing code...
+
+                      if (this.status === 200) {
+                        const res = JSON.parse(this.responseText);
+                        if (res.result === "success" && res.eventId !== null && res.eventId !== "") {
+                          console.log("Event added successfully:", res);
+                          calendar.addEvent({
+                            id: res.eventId,
+                            title: inputString,
+                            start: startTime,
+                            end: endTime,
+                          });
+
+                          // Add automatic page refresh
+                          location.reload();
+                        } else {
+                          console.error("스케줄 등록 실패 Server response:", res);
+                        }
+                      } else {
+                        console.error("서버 에러. Status code:", this.status);
+                      }
+                    };
+
+                    xhr.open("POST", '/pro/set_all_day_event/');
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+                    xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
+
+                    xhr.send(JSON.stringify({
+                      title: inputString,
+                      start: startTime.toISOString(),
+                      end: endTime.toISOString(),
+                      allDay: false,
+                    }));
+                  } else {
+                    alert("잘못된 시작 또는 종료 시간입니다. 다시 시도해주세요.");
+                  }
+                }
+
+                // Call the getTimeInput function until valid times are provided
+                getTimeInput();
+              } else {
+                alert("잘못된 제목입니다. 다시 시도해주세요.");
+              }
+            },
+
+
+              eventClick: function (event) {
+                const eventId = event.event._def.publicId;
+                const eventName = event.event._def.title;
+
+                window.location.href = "../../pro/edit_event/" + eventId + "/";
+
+                if (!window.opener) {
+                  window.opener.location.reload();
+                }
+              },
+
+              events: {
+                url: '/pro/get_events/',
+                failure: function () {
+                  document.getElementById('script-warning').style.display = 'block';
+                }
+              },
+              loading: function (bool) {
+                document.getElementById('loading').style.display =
+                  bool ? 'block' : 'none';
+              }
+            });
+
+            calendar.render();
+          });
+  </script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+      font-size: 14px;
+    }
+
+    #script-warning {
+      display: none;
+      background: #eee;
+      border-bottom: 1px solid #ddd;
+      padding: 0 10px;
+      line-height: 40px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 12px;
+      color: red;
+    }
+
+    #loading {
+      display: none;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    #calendar {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 10px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div class="logo">
+        <h1><a href="/pro/pro_main">DukBookHi</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+      {% if user %}
+          {{ user.username }} -
+          {% with pro_user=request.user.pro_user %}
+              {{ pro_user.user_name }} 교수님
+          {% endwith %}
+      {% endif %}
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto" href="/../pro/pro_schedule">Register schedule</a></li>
+          <li><a class="nav-link scrollto active" href="{% url 'pro_logout' %}">Logout</a></li>
+          <li><a class="getstarted scrollto" href="#features">MyPage</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>교수자 메인 페이지</h2>
+          <ol>
+            <li><a href="/pro/pro_main/">Main</a></li>
+            <li>교수자 메인 페이지</li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs Section -->
+
+    <section class="inner-page">
+      <div class="container">
+        <p>
+          <div id='loading'>loading...</div>
+          <div id='calendar'></div>
+        </p>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <section class="breadcrumbs">
+      <div class="container">
+
+
+
+      </div>
+    </section><!-- End Breadcrumbs Section -->
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h3>Duksung Women's University</h3>
+            <p>
+              01369|서울 도봉구 삼양로144길 33<br>
+              (쌍문동, 덕성여자대학교)|덕성여자대학교<br><br>
+              <strong>Phone:</strong> (ARS) 02-901-8000<br>
+              <strong>Email:</strong> webmaster@duksung.ac.kr<br>
+            </p>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="https://www.duksung.ac.kr/main.do">Duksung Homepage</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="https://lms.duksung.ac.kr/">Duksung E-class</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="https://sso.duksung.ac.kr/svc/tk/Auth.do?ac=Y&ifa=N&id=portal&">Duksung Potal</a></li>
+
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Register schedule</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">MyPage</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Duksung Social Networks</h4>
+            <div class="social-links mt-3">
+               <a href="https://blog.naver.com/dswuniv_blog" class="blog"><i class="bx bx-bold"></i></a>
+              <a href="https://www.facebook.com/DukSungWU" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="https://www.instagram.com/duksung_official/" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="https://www.youtube.com/channel/UCrda7r7df_GPinyBULMA6CA" class="youtube"><i class="bx bxl-youtube"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </footer><!-- End Footer -->
+
+  <a class="back-to-top d-flex align-items-center justify-content-center" href="#"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'single_pages/assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'single_pages/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'single_pages/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'single_pages/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'single_pages/assets/vendor/php-email-form/validate.js' %}"></script>
+
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'single_pages/assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

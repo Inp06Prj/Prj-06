@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>덕북희 - 강의실 대여 커뮤니티</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{% static 'single_pages/assets/img/favicon.png" rel="icon">
+    <link href="{% static 'single_pages/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'single_pages/assets/vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'single_pages/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'single_pages/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'single_pages/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'single_pages/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'single_pages/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'single_pages/assets/css/style.css' %}" rel="stylesheet">
+
+
+</head>
+<style type="text/css">
+	.content {
+		max-width:500px;
+		margin: auto;
+		padding:10px;
+	}
+
+	.board_for_read {
+		width: 100%;
+		background-color:#f1f1f1;
+	}
+
+	#title {
+		height: 32px;
+		width: 100%;
+		border-radius: 0.5em;
+		border: none;
+		font-family: inherit;
+		font-size: inherit;
+	}
+
+	textarea {
+		width: 100%;
+		font-family: inherit;
+		font-size: 100%;
+		resize: none;
+		border-radius: 0.5em;
+		padding-block: 10px;
+		border: 0px;
+	}
+
+	.td_title {
+		background-color: #d8d8d8
+	}
+</style>
+<script type="text/javascript">
+    function validateForm() {
+        var title = document.getElementById("title").value.trim();
+
+        if (title === "") {
+            alert("제목을 입력하세요.");
+            return false; // Prevent form submission
+        }
+
+        return true; // Allow form submission
+    }
+</script>
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top ">
+        <div class="container d-flex align-items-center justify-content-between">
+
+            <div class="logo">
+                <h1><a href="/stu/main/">DukBookHi</a></h1>
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+            </div>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+
+                    <li class="dropdown"><a href="#"><span>Rantal Lecture hall</span> <i
+                                class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li class="dropdown"><a href="#"><span>차미리사 기념관</span> <i
+                                        class="bi bi-chevron-right"></i></a>
+                                <ul>
+                                    <li><a href="#">1층</a></li>
+                                    <li><a href="#">2층</a></li>
+                                    <li><a href="#">3층</a></li>
+                                    <li><a href="#">4층</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a href="#"><span>인문사회관</span> <i class="bi bi-chevron-right"></i></a>
+                                <ul>
+                                    <li><a href="#">1층</a></li>
+                                    <li><a href="#">2층</a></li>
+                                    <li><a href="#">3층</a></li>
+                                    <li><a href="#">4층</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a href="#"><span>자연관</span> <i class="bi bi-chevron-right"></i></a>
+                                <ul>
+                                    <li><a href="#">1층</a></li>
+                                    <li><a href="#">2층</a></li>
+                                    <li><a href="#">3층</a></li>
+                                    <li><a href="#">4층</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a href="#"><span>대강의동</span> <i class="bi bi-chevron-right"></i></a>
+                                <ul>
+                                    <li><a href="#">1층</a></li>
+                                    <li><a href="#">2층</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="#"><span>Professor consultation reservation</span> <i
+                                class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li class="dropdown"><a href="#"><span>과학기술대학</span> <i class="bi bi-chevron-right"></i></a>
+                                <ul>
+                                    <li><a href="#">컴퓨터공학과</a></li>
+                                    <li><a href="#">사이버보안학과</a></li>
+                                    <li><a href="#">식품영양학과</a></li>
+                                    <li><a href="#">바이오공학과</a></li>
+                                    <li><a href="#">생활체육학과</a></li>
+                                    <li><a href="#">화학과</a></li>
+                                    <li><a href="#">수학과</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a href="#"><span>인문사회대학</span> <i class="bi bi-chevron-right"></i></a>
+                                <ul>
+                                    <li><a href="#">국어국문학과</a></li>
+                                    <li><a href="#">영어영문학과</a></li>
+                                    <li><a href="#">경영학과</a></li>
+                                    <li><a href="#">철학과</a></li>
+                                    <li><a href="#">회계학과</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="nav-link scrollto" href="#faq">약학대학</a></li>
+                    </li>
+                    <li class="dropdown"><a href="#"><span>Art & Desing 대학</span> <i
+                                class="bi bi-chevron-right"></i></a>
+                        <ul>
+                            <li><a href="#">동양화전공</a></li>
+                            <li><a href="#">서양화전공</a></li>
+                            <li><a href="#">실내디자인전공</a></li>
+                            <li><a href="#">시각디자인전공</a></li>
+                            <li><a href="#">텍스타일디자인전공</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                </li>
+                <li><a class="nav-link scrollto" href="/board">Community</a></li>
+                <li><a class="nav-link scrollto active" href="{% url 'custom_logout' %}">Logout</a></li>
+                <li><a class="getstarted scrollto" href="/stu/my_page">MyPage</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+
+        </div>
+    </header><!-- End Header -->
+
+    <main id="main">
+
+        <!-- ======= Breadcrumbs Section ======= -->
+        <section class="breadcrumbs">
+            <div class="container">
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>강의실 대여 커뮤니티 게시판 글쓰기</h2>
+                    <ol>
+                        <li><a href="/stu/main/">Main</a></li>
+                        <li>강의실 대여 커뮤니티 게시판</li><li>글쓰기</li>
+                    </ol>
+                </div>
+
+            </div>
+        </section><!-- End Breadcrumbs Section -->
+
+        <section class="inner-page">
+            <div class="container">
+                <p>
+                    <div class="content">
+                        <form action="{% url 'board:write_board' %}" method="post" onsubmit="return validateForm();">
+                        {% csrf_token %}
+
+                        <div style="text-align:right;padding: 5px;">
+                            <input type="submit" value="저장">
+                        </div>
+
+                        <table class="board_for_read">
+                            <tbody>
+                                <tr>
+                                    <td class="td_title" style="text-align:center; width:20%;">제목</td>
+                                    <td style="padding:10px;">
+                                        <input type="text" name="title" id="title" value="{{ board.title }}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td_title" style="text-align:center;">내용</td>
+                                    <td style="padding:10px;">
+                                        <textarea name="detail" id="detail" rows="10">{{ board.content }}</textarea>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </form>
+
+                        <div style="text-align:left;">
+                            <a href="{% url 'board:index' %}">>> 글 목록</a>
+                        </div>
+                    </div>
+                </p>
+            </div>
+        </section>
+
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+
+        <section class="breadcrumbs">
+            <div class="container">
+
+
+
+            </div>
+        </section><!-- End Breadcrumbs Section -->
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h3>Duksung Women's University</h3>
+                        <p>
+                            01369|서울 도봉구 삼양로144길 33<br>
+                            (쌍문동, 덕성여자대학교)|덕성여자대학교<br><br>
+                            <strong>Phone:</strong> (ARS) 02-901-8000<br>
+                            <strong>Email:</strong> webmaster@duksung.ac.kr<br>
+                        </p>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://www.duksung.ac.kr/main.do">Duksung
+                                    Homepage</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="https://lms.duksung.ac.kr/">Duksung
+                                    E-class</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a
+                                    href="https://sso.duksung.ac.kr/svc/tk/Auth.do?ac=Y&ifa=N&id=portal&">Duksung
+                                    Potal</a></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Rantal Lecture hall</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Professor consultation reservation</a>
+                            </li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/board">Community</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">MyPage</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Duksung Social Networks</h4>
+                        <div class="social-links mt-3">
+                            <a href="https://blog.naver.com/dswuniv_blog" class="blog"><i class="bx bx-bold"></i></a>
+                            <a href="https://www.facebook.com/DukSungWU" class="facebook"><i
+                                    class="bx bxl-facebook"></i></a>
+                            <a href="https://www.instagram.com/duksung_official/" class="instagram"><i
+                                    class="bx bxl-instagram"></i></a>
+                            <a href="https://www.youtube.com/channel/UCrda7r7df_GPinyBULMA6CA" class="youtube"><i
+                                    class="bx bxl-youtube"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </footer><!-- End Footer -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'single_pages/assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'single_pages/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'single_pages/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'single_pages/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'single_pages/assets/vendor/php-email-form/validate.js' %}"></script>
+
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'single_pages/assets/js/main.js' %}"></script>
+
+</body>
+
+</html>
