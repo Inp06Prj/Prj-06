@@ -40,10 +40,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login','professor',
     'room','single_pages',
+    'board',
 ]
 
-# 사용자 정의 모델을 사용하도록 설정
-AUTH_USER_MODEL = 'login.User'
+LOGIN_URL = 'login/'          # 로그인 URL
+# LOGIN_REDIRECT_URL = '/main'  # 로그인 후 URL
+# LOGOUT_REDIRECT_URL = 'login/'            # 로그아웃 후 URL
+LOGOUT_REDIRECT_URL = ''
+# AUTH_USER_MODEL = "login.stu_User"       # 커스텀 인증 모델
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -110,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
 TIME_ZONE = 'Asia/Seoul'
 
