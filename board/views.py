@@ -12,10 +12,10 @@ from django.contrib.auth.decorators import login_required
 
 def index(request):
     all_boards = Board.objects.all().order_by('-pk') # 모든 데이터 조회, 내림차순(-표시) 조회
-    paginator = Paginator(all_boards, 5)
+    paginator = Paginator(all_boards, 7)
     page = int(request.GET.get('page', 1))
     board_list = paginator.get_page(page)
-    return render(request, 'board/index.html', {'title':'Board List', 'board_list':all_boards})
+    return render(request, 'board/index.html', {'title':'Board List', 'board_list':board_list})
 
 
 def detail(request, board_id):
@@ -73,3 +73,41 @@ def delete_board(request, board_id):
 
     return redirect('board:index')
 
+
+@login_required(login_url='/login')
+def edit_board(request, board_id):
+    board = get_object_or_404(Board, id=board_id)
+
+    if request.user == board.author:
+        if request.method == 'POST':
+            board.title = request.POST.get('title')
+            board.content = request.POST.get('detail')
+            board.save()
+            return HttpResponseRedirect(reverse('board:detail', args=(board_id,)))
+        else:
+            return render(request, 'board/edit.html', {'board': board})
+    else:
+        messages.error(request, '글을 수정할 권한이 없습니다.')
+        return redirect('board:index')
+
+
+from django.db.models import Q
+
+
+def index(request):
+    search_query = request.GET.get('q', '')
+
+    if search_query:
+        # If there is a search query, filter the boards based on title and content
+        all_boards = Board.objects.filter(
+            Q(title__icontains=search_query) | Q(content__icontains=search_query)).order_by('-pk')
+    else:
+        # If there is no search query, retrieve all boards as before
+        all_boards = Board.objects.all().order_by('-pk')
+
+    paginator = Paginator(all_boards, 7)
+    page = int(request.GET.get('page', 1))
+    board_list = paginator.get_page(page)
+
+    return render(request, 'board/index.html',
+                  {'title': 'Board List', 'board_list': board_list, 'search_query': search_query})
