@@ -16,6 +16,6 @@
 
 | <center>정지민 </center> |
 | --- |
-| <center> <img width="150px" src="https://avatars.githubusercontent.com/u/139054208?v=4" /></center> | 
+| <center> <img width="150px" src="https://avatars.githubusercontent.com/u/141540563?v=4" /></center> | 
 | <center>챗봇 </center> |
 | [@sunflwwer](https://github.com/sunflwwer)  |
