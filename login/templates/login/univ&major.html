@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>덕북희 - 메인</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+
+    <!-- Favicons -->
+    <link href="{% static 'single_pages/assets/img/favicon.png' %}" rel="icon">
+    <link href="{% static 'single_pages/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'single_pages/assets/vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'single_pages/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'single_pages/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'single_pages/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'single_pages/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'single_pages/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'single_pages/assets/css/style.css' %}" rel="stylesheet">
+
+    <title>과학기술대학 과 리스트</title>
+    <style>
+
+    .icon-box img {
+        max-width: 100%; /* 이미지의 최대 너비를 부모 요소에 맞춤 */
+        height: 15px; /* 높이를 자동으로 조절하여 가로세로 비율 유지 */
+    }
+
+
+.card {
+    /* 여기에 원하는 카드의 크기와 스타일을 지정하세요 */
+    width: 100%; /* 예: 카드의 가로 너비를 100%로 지정 */
+    height: 100%; /* 예: 카드의 가로 너비를 100%로 지정 */
+    /* 추가적으로 필요한 스타일을 지정할 수 있습니다. */
+}
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header class="fixed-top " id="header">
+    <div class="container d-flex align-items-center justify-content-between">
+
+        <div class="logo">
+            <h1><a href="/stu/main">DukBookHi</a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        </div>
+
+        <nav class="navbar" id="navbar">
+            <ul>
+
+                <li class="dropdown"><a href="#"><span>Rantal Lecture Room</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li class="dropdown"><a href="#"><span>차미리사 기념관</span> <i class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="#">1층</a></li>
+                                <li><a href="#">2층</a></li>
+                                <li><a href="#">3층</a></li>
+                                <li><a href="#">4층</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="#"><span>인문사회관</span> <i class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="#">1층</a></li>
+                                <li><a href="#">2층</a></li>
+                                <li><a href="#">3층</a></li>
+                                <li><a href="#">4층</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="#"><span>자연관</span> <i class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="#">1층</a></li>
+                                <li><a href="#">2층</a></li>
+                                <li><a href="#">3층</a></li>
+                                <li><a href="#">4층</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="#"><span>대강의동</span> <i class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="#">1층</a></li>
+                                <li><a href="#">2층</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="#"><span>Professor Consultation Reservation</span> <i
+                        class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li class="dropdown"><a href="#"><span>과학기술대학</span> <i class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="/stu/professors/">컴퓨터공학과</a></li>
+                                <li><a href="#">사이버보안학과</a></li>
+                                <li><a href="#">식품영양학과</a></li>
+                                <li><a href="#">바이오공학과</a></li>
+                                <li><a href="#">생활체육학과</a></li>
+                                <li><a href="#">화학과</a></li>
+                                <li><a href="#">수학과</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="#"><span>글로벌융합대학</span> <i class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="#">국어국문학과</a></li>
+                                <li><a href="#">영어영문학과</a></li>
+                                <li><a href="#">경영학과</a></li>
+                                <li><a href="#">철학과</a></li>
+                                <li><a href="#">회계학과</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="nav-link scrollto" href="#faq">약학대학</a></li>
+
+                        <li class="dropdown"><a href="#"><span>Art & Desing 대학</span> <i
+                                class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="#">동양화전공</a></li>
+                                <li><a href="#">서양화전공</a></li>
+                                <li><a href="#">실내디자인전공</a></li>
+                                <li><a href="#">시각디자인전공</a></li>
+                                <li><a href="#">텍스타일디자인전공</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a class="nav-link scrollto" href="/inner_page/">Community</a></li>
+                <li><a class="nav-link scrollto active" href="/pro_inner_page/">Logout</a></li>
+                <li><a class="getstarted scrollto" href="/mypage/">MyPage</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
+    </div>
+</header><!-- End Header -->
+
+<main id="main">
+
+    <br>
+    <!-- ======= Frequently Asked Questions Section ======= -->
+    <section class="faq section-bg" id="faq">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <br><br><br>
+                <h2>소속 대학 선택</h2>
+                <p>상담을 원하는 교수님이 속한 대학을 골라주세요.</p>
+                <br><br>
+            </div>
+
+            <div class="accordion-list">
+                <ul>
+                    <li data-aos="fade-up">
+                        <i class="bx bx-chevron-right-circle icon-help"></i> <a class="collapse"
+                                                                                data-bs-target="#accordion-list-1"
+                                                                                data-bs-toggle="collapse">과학기술대학<i
+                            class="bx bx-chevron-down icon-show"></i><i
+                            class="bx bx-chevron-up icon-close"></i></a>
+                        <div class="collapse" data-bs-parent=".accordion-list" id="accordion-list-1">
+
+                            <div class=" d-flex align-items-stretch order-2 order-lg-1">
+                                <div class="content d-flex flex-column justify-content-center">
+                                    <div class="row text-center" >
+                                        <div class="col-md-3">
+                                            <br>
+                                            <div class="card"><a href="/stu/professors/"><br>
+
+                                                <img alt="컴퓨터공학과"
+                                                     class="card-img-top"
+                                                     src="{% static 'single_pages/assets/img/computer.png' %}">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><hr>컴퓨터공학과</h5>
+                                                </div>
+                                            </a>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <br>
+                                            <div class="card "><a href="/professor_list/"><br>
+                                                <img alt="바이오공학과"
+                                                     class="card-img-top"
+                                                     src="{% static 'single_pages/assets/img/bio.png' %}">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><hr>바이오공학과</h5>
+                                                </div>
+                                            </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <br>
+                                            <div class="card "><a href="/professor_list/"><br>
+                                                <img alt="정보통계학과"
+                                                     class="card-img-top"
+                                                     src="{% static 'single_pages/assets/img/statistics.jpg' %}">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><hr>정보통계학과</h5>
+                                                </div>
+                                            </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3" ><br>
+                                            <div class="card "><a href="/professor_list/"><br>
+                                                <img alt="수학과"
+                                                     class="card-img-top"
+                                                     src="{% static 'single_pages/assets/img/math.png' %}">
+                                                <div class="card-body">
+                                                    <hr><h5 class="card-title">수학과</h5>
+                                                </div>
+                                            </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="card "><a href="/professor_list/"><br>
+                                                <img alt="생활체육학과"
+                                                     class="card-img-top"
+                                                     src="{% static 'single_pages/assets/img/physical.jpg' %}"><hr>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">생활체육학과</h5>
+                                                </div>
+                                            </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="card "><a href="/professor_list/"><br>
+                                                <img alt="사이버보안학과"
+                                                     class="card-img-top"
+                                                     src="{% static 'single_pages/assets/img/cyber.png' %}"><hr>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">사이버보안학과</h5>
+                                                </div>
+                                            </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3" >
+                                            <div class="card "><a href="/professor_list/"><br>
+                                                <img alt="IT미디어공학과"
+                                                     class="card-img-top"
+                                                     src="{% static 'single_pages/assets/img/itmedia.png' %}"><hr>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">IT미디어공학과</h5>
+                                                </div>
+                                            </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3 " >
+                                            <div class="card "><a href="/professor_list/"><br>
+                                                <img alt="식품영양학과"
+                                                     class="card-img-top"
+                                                     src="{% static 'single_pages/assets/img/food.png' %}"><hr>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">식품영양학과</h5>
+                                                </div>
+                                            </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </li>
+
+                    <li data-aos="fade-up" data-aos-delay="100">
+                        <i class="bx bx-chevron-right-circle icon-help"></i> <a class="collapsed" data-bs-target="#accordion-list-2" data-bs-toggle="collapse">글로벌융합대학<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                        <div class="collapse" data-bs-parent=".accordion-list" id="accordion-list-2">
+                            <p>
+                                글로벌융합대학 소속 학과 리스트
+                            </p>
+                        </div>
+                    </li>
+
+                    <li data-aos="fade-up" data-aos-delay="200">
+                        <i class="bx bx-chevron-right-circle icon-help"></i> <a class="collapsed" data-bs-target="#accordion-list-3" data-bs-toggle="collapse">약학대학<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                        <div class="collapse" data-bs-parent=".accordion-list" id="accordion-list-3">
+                            <p>
+                                약학대학 소속 학과 리스트
+                            </p>
+                        </div>
+                    </li>
+
+
+                    <li data-aos="fade-up" data-aos-delay="400">
+                        <i class="bx bx-chevron-right-circle icon-help"></i> <a class="collapsed" data-bs-target="#accordion-list-5" data-bs-toggle="collapse">
+                        Art & Desing
+                        대학<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                        <div class="collapse" data-bs-parent=".accordion-list" id="accordion-list-5">
+                            <p>
+                                Art & Desing 대학 소속 학과 리스트
+                            </p>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+        <br><br><br><br>
+    </section><!-- End Frequently Asked Questions Section -->
+
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+
+
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-6 footer-contact">
+                    <h3>Duksung Women's University</h3>
+                    <p>
+                        01369|서울 도봉구 삼양로144길 33<br>
+                        (쌍문동, 덕성여자대학교)|덕성여자대학교<br><br>
+                        <strong>Phone:</strong> (ARS) 02-901-8000<br>
+                        <strong>Email:</strong> webmaster@duksung.ac.kr<br>
+                    </p>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="https://www.duksung.ac.kr/main.do">Duksung
+                            Homepage</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="https://lms.duksung.ac.kr/">Duksung
+                            E-class</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a
+                                href="https://sso.duksung.ac.kr/svc/tk/Auth.do?ac=Y&ifa=N&id=portal&">Duksung
+                            Potal</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Rantal Lecture Room</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Professor Consultation Reservation</a>
+                        </li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/board">Community</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/stu/my_page">MyPage</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Duksung Social Networks</h4>
+                    <div class="social-links mt-3">
+                        <a class="blog" href="https://blog.naver.com/dswuniv_blog"><i class="bx bx-bold"></i></a>
+                        <a class="facebook" href="https://www.facebook.com/DukSungWU"><i
+                                class="bx bxl-facebook"></i></a>
+                        <a class="instagram" href="https://www.instagram.com/duksung_official/"><i
+                                class="bx bxl-instagram"></i></a>
+                        <a class="youtube" href="https://www.youtube.com/channel/UCrda7r7df_GPinyBULMA6CA"><i
+                                class="bx bxl-youtube"></i></a>
+                        <br><br><br>
+                        <p class="logo"><img alt="덕성여자대학교" height="40"
+                                             src="{% static 'single_pages/assets/img/footer_logo.png' %}"
+                                             width="165"
+                        ></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</footer><!-- End Footer -->
+
+<a class="back-to-top d-flex align-items-center justify-content-center" href="/inner_page/"><i
+        class="bi bi-arrow-up-short"></i></a>
+<!--href 바꾸세요-->
+
+
+<!-- Vendor JS Files -->
+<script src="{% static 'single_pages/assets/vendor/aos/aos.js' %}"></script>
+<script src="{% static 'single_pages/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'single_pages/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+<script src="{% static 'single_pages/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+<script src="{% static 'single_pages/assets/vendor/php-email-form/validate.js' %}"></script>
+
+
+<!-- Template Main JS File -->
+<script src="{% static 'single_pages/assets/js/main.js' %}"></script>
+
+
+</body>
+</html>

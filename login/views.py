@@ -1,10 +1,11 @@
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
+
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.urls import reverse
-from .models import UserProfile
 
 from django.contrib.auth.models import Group
 
@@ -30,15 +31,12 @@ def custom_login(request):
                     return redirect(reverse(main_view))
                 else:
                     messages.error(request, '로그인 실패: 폼이 유효하지 않음')
-            # else:
-            #     messages.error(request, '로그인 실패: 사용자 인증 실패')
         else:
             messages.error(request, '로그인 실패: 폼이 유효하지 않음')
     else:
         form = AuthenticationForm()
 
     return render(request, 'login/login.html', {'form': form})
-
 
 
 def custom_logout(request):
@@ -50,7 +48,6 @@ def custom_logout(request):
 def main_view(request):
     stu_users = UserProfile.objects.order_by('-pk')
     context = {'stu_users': stu_users}
-    # return render(request, 'login/main.html', context)
 
     if request.user.is_authenticated:
         # 인증된 사용자에게 메인 페이지를 렌더링합니다.
@@ -61,13 +58,116 @@ def main_view(request):
         return redirect(reverse('custom_login'))
 
 
-from .models import UserProfile
+from .models import UserProfile, Reserve
 
 
+# @login_required(login_url='custom_login')
+# def my_page(request):
+#     user = request.user
+#     user_profile, created = UserProfile.objects.get_or_create(user=user)
+#
+#     # 여름님 코드
+#     reservations = Reserve.objects.filter(student=user_profile)
+#     professor = Pro_User.objects.all()
+#     context = {'user_profile': user_profile, 'reservations': reservations, 'professor': professor}
+#     print(f"User: {user_profile}, Reservations: {reservations}")
+#
+#     #context = {'user_profile': user_profile}
+#     return render(request, 'login/mypage.html', context)
 @login_required(login_url='custom_login')
-def mypage(request):
+def my_page(request):
     user = request.user
     user_profile, created = UserProfile.objects.get_or_create(user=user)
 
-    context = {'user_profile': user_profile}
+    # 여름님 코드
+    reservations = Reserve.objects.filter(student=user_profile)
+
+    # Add pagination to the reservations
+    page_number = request.GET.get('page', 1)
+    paginator = Paginator(reservations, 4)  # Show 10 reservations per page
+    page_obj = paginator.get_page(page_number)
+
+    professor = Pro_User.objects.all()
+    context = {'user_profile': user_profile, 'reservations': page_obj, 'professor': professor}
+
+    # context = {'user_profile': user_profile}
     return render(request, 'login/mypage.html', context)
+
+
+from professor.models import Pro_User, Calendar
+
+
+def professor_schedule(request, professor_id):
+    professor = get_object_or_404(Pro_User, pk=professor_id)
+    schedule = Calendar.objects.filter(user=professor).values('id', 'title', 'start', 'end')
+    schedule = Calendar.objects.filter(user=professor)
+    return render(request, 'login/professor_schedule.html', {'professor': professor, 'schedule': schedule})
+
+
+def professor_list(request):
+    professors = Pro_User.objects.filter(is_professor=True)
+    return render(request, 'login/professor_list.html', {'professors': professors})
+
+
+# def univ_list(request) : #단과대 선택
+#     univ = Pro_User.objects.all()
+#
+#     return render(
+#         request,
+#         'login/univlist.html',
+#         {
+#             'univ':univ,
+#         }
+#     )
+# def univ_and_major(request):
+#     major, univ = UserProfile.objects.all()
+#     return render(
+#         request,
+#         'login/univ&major.html',
+#         {
+#             'univ': univ,
+#             'major': major,
+#         }
+#     )
+
+def univ_and_major(request):
+    user_profile = UserProfile.objects.get(user=request.user)
+    major = user_profile.major
+    univ = user_profile.univ
+
+    return render(
+        request,
+        'login/univ&major.html',
+        {
+            'univ': univ,
+            'major': major,
+        }
+    )
+
+
+
+def create_reservation(request, professor_id):
+    if request.method == 'POST':
+        student = request.user.userprofile
+        # professor = get_object_or_404(Pro_User, pk=professor_id)
+        professor = get_object_or_404(Pro_User, id=professor_id)
+        reservation_date = request.POST['reservation_date']
+        reservation_time = request.POST['reservation_time']
+        reservation_reason = request.POST['reservation_reason']
+        reservation = Reserve.objects.create(
+            student=student,
+            professor=professor,
+            date=reservation_date,
+            time=reservation_time,
+            reason=reservation_reason
+        )
+        reservation.save()
+
+        # 디버깅을 위해 예약 정보를 콘솔에 출력
+        print(f"Reservation created: {reservation}")
+
+        # POST 요청 이후에 마이페이지로 리다이렉트
+        return redirect(reverse('professor_schedule', kwargs={'professor_id': professor_id}))
+
+
+    return render(request, 'login/professor_schedule.html')

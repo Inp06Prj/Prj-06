@@ -10,4 +10,6 @@ urlpatterns = [
     path('write/write_board', views.write_board, name='write_board'),
     path('<int:board_id>/create_reply', views.create_reply, name='create_reply'),
     path('delete/<int:board_id>/', views.delete_board, name='delete_board'),
+
+    path('<int:board_id>/edit/', views.edit_board, name='edit_board'),
 ]

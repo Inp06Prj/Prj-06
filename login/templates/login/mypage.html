@@ -5,6 +5,7 @@
 <html lang="en">
 
 <head>
+    <link rel="shortcut icon" type="image" href="{% static 'single_pages/assets/img/dukbookhi_logo2.png' %}">
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -13,8 +14,8 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="{% static 'single_pages/assets/img/favicon.png" rel="icon">
-    <link href="{% static 'single_pages/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="{% static 'single_pages/assets/img/favicon.png' %}" rel="icon">
+    <link href="{% static 'single_pages/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
 
     <!-- Google Fonts -->
@@ -33,7 +34,6 @@
     <!-- Template Main CSS File -->
     <link href="{% static 'single_pages/assets/css/style.css' %}" rel="stylesheet">
 
-
 </head>
 
 <body>
@@ -47,20 +47,18 @@
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
         </div>
-        <!--        이건 누가 잘 로그인 했는지 알아보기 위해서 추가한 것 나중에 구현 마무리 단계에서 삭제할 예정-->
-            {% if user %}
-                {{ user.username }} -
-                {{ user_profile.user_name }}
-            {% endif %}
+
+        {% if user %}
+            {{ user.username }} -
+            {{ user_profile.user_name }}
+        {% endif %}
 
         <nav class="navbar" id="navbar">
             <ul>
 
-                <li class="dropdown"><a href="#"><span>Rantal Lecture hall</span> <i
-                        class="bi bi-chevron-down"></i></a>
+                <li class="dropdown"><a href="#"><span>Rantal Lecture Room</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                        <li class="dropdown"><a href="#"><span>차미리사 기념관</span> <i
-                                class="bi bi-chevron-right"></i></a>
+                        <li class="dropdown"><a href="#"><span>차미리사 기념관</span> <i class="bi bi-chevron-right"></i></a>
                             <ul>
                                 <li><a href="#">1층</a></li>
                                 <li><a href="#">2층</a></li>
@@ -92,12 +90,12 @@
                         </li>
                     </ul>
                 </li>
-                <li class="dropdown"><a href="#"><span>Professor consultation reservation</span> <i
+                <li class="dropdown"><a href="#"><span>Professor Consultation Reservation</span> <i
                         class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li class="dropdown"><a href="#"><span>과학기술대학</span> <i class="bi bi-chevron-right"></i></a>
                             <ul>
-                                <li><a href="#">컴퓨터공학과</a></li>
+                                <li><a href="/stu/professors/">컴퓨터공학과</a></li>
                                 <li><a href="#">사이버보안학과</a></li>
                                 <li><a href="#">식품영양학과</a></li>
                                 <li><a href="#">바이오공학과</a></li>
@@ -106,7 +104,7 @@
                                 <li><a href="#">수학과</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown"><a href="#"><span>인문사회대학</span> <i class="bi bi-chevron-right"></i></a>
+                        <li class="dropdown"><a href="#"><span>글로벌융합대학</span> <i class="bi bi-chevron-right"></i></a>
                             <ul>
                                 <li><a href="#">국어국문학과</a></li>
                                 <li><a href="#">영어영문학과</a></li>
@@ -116,20 +114,19 @@
                             </ul>
                         </li>
                         <li><a class="nav-link scrollto" href="#faq">약학대학</a></li>
+
+                        <li class="dropdown"><a href="#"><span>Art & Desing 대학</span> <i
+                                class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="#">동양화전공</a></li>
+                                <li><a href="#">서양화전공</a></li>
+                                <li><a href="#">실내디자인전공</a></li>
+                                <li><a href="#">시각디자인전공</a></li>
+                                <li><a href="#">텍스타일디자인전공</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
-                <li class="dropdown"><a href="#"><span>Art & Desing 대학</span> <i
-                        class="bi bi-chevron-right"></i></a>
-                    <ul>
-                        <li><a href="#">동양화전공</a></li>
-                        <li><a href="#">서양화전공</a></li>
-                        <li><a href="#">실내디자인전공</a></li>
-                        <li><a href="#">시각디자인전공</a></li>
-                        <li><a href="#">텍스타일디자인전공</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul>
                 <li><a class="nav-link scrollto" href="/board">Community</a></li>
                 <li><a class="nav-link scrollto active" href="{% url 'custom_logout' %}">Logout</a></li>
                 <li><a class="getstarted scrollto" href="/stu/my_page">MyPage</a></li>
@@ -157,131 +154,227 @@
 
         </div>
     </section><!-- End Breadcrumbs Section -->
-
-    <section class="inner-page">
+    <!-- ======= Pricing Section ======= -->
+    <section class="pricing" id="pricing">
         <div class="container">
-            <!-- Page Content-->
-            <div class="card shadow border-50 rounded-4 mb-5">
-                <div class="container px-5 my-5">
-                    <div class=" mb-5">
-                        <div class=" testimonial-item">
-                            <div class="text-center">
-                                <img alt=""
-                                     class="testimonial-img"
-                                     src="https://us.123rf.com/450wm/thesomeday123/thesomeday1231712/thesomeday123171200009/91087331-%EB%82%A8%EC%84%B1%EC%9D%84%EC%9C%84%ED%95%9C-%EA%B8%B0%EB%B3%B8-%EC%95%84%EB%B0%94%ED%83%80-%ED%94%84%EB%A1%9C%ED%95%84-%EC%95%84%EC%9D%B4%EC%BD%98-%ED%9A%8C%EC%83%89-%EC%82%AC%EC%A7%84-%EC%9E%90%EB%A6%AC-%ED%91%9C%EC%8B%9C-%EC%9E%90-%EC%9D%BC%EB%9F%AC%EC%8A%A4%ED%8A%B8.jpg"
-                                     width="200">
-                                <div class="card shadow mx-auto border-0 rounded-4 mb-3" style="width: 250px;"><h4>
-                                    ✅ 학번 : {{ user_profile.user.username }}</h4></div>
-                                <div class="card shadow mx-auto border-0 rounded-4 mb-3" style="width: 250px;">
 
-                                    <h4>✅ 이름 : {{ user_profile.user_name }}
-                                    </h4>
-                                    <br>
-                                    <h5>✅ 단과대학 : {{ user_profile.univ }}
-                                    </h5>
-                                    <br>
-                                    <h5>✅ 전공 : {{ user_profile.major }}
-                                    </h5>
-                                    <br>
-                                    <h5>✅ 전화번호 : {{ user_profile.phone_number }}
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="row gx-5 justify-content-center">
-                                <div class="col-lg-11 col-xl-9 col-xxl-8">
-                                    <!-- Experience Section-->
-                                    <section>
-                                        <div class="d-flex align-items-center justify-content-between mb-4">
-                                            <h2 class="text-primary fw-bolder mb-0">강의실 대여 현황</h2>
+            <div class="section-title">
+                <h2>Student Profile</h2>
+            </div>
 
-                                        </div>
-                                        <!-- Experience Card 1-->
-                                        <!-- 여기서부터 템플릿태그 -> if 이 내용이 있다면 이런식으로 들어가면됨 -->
-                                        <div class="card shadow border-0 rounded-4 mb-5">
-                                            <div class="card-body p-5">
-                                                <div class="row align-items-center gx-5">
-                                                    <div class="col text-center text-lg-start mb-4 mb-lg-0">
-                                                        <div class="bg-light p-4 rounded-4">
-                                                            <div class="text-primary fw-bolder mb-2">강의실명</div>
+            <div class="row no-gutters">
 
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-8">
-                                                        <div class="fw-bolder">목적</div>
-                                                        <br>
-                                                        <div>
-                                                            날짜
-                                                        </div>
-                                                        <br>
-                                                        <div class="text-muted">시간</div>
-                                                    </div>
+                <div class="col-lg-4 " data-aos="fade-right">
+                </div>
 
-                                                </div>
-                                            </div>
-                                        </div>
+                <div class="col-lg-4 box featured" data-aos="fade-up">
+                    <img alt="" src="{% static 'single_pages/assets/img/me.png' %}" width="150">
+                    {% if user %}
+              <h3>👋🏻 {{ user_profile.user_name }} 👋🏻</h3>
+
+            <ul>
+                <li><i class="bx bx-user-pin"></i> 학번 : {{ user.username }}</li>
+              <li><i class="bx bx-group"></i> 단과대 : {{ user_profile.univ }}</li>
+              <li><i class="bx bx-edit-alt"></i> 전공 : {{ user_profile.major }}</li>
+              <li><i class="bx bx-phone"></i> 전화번호 : {{ user_profile.phone_number }}</li>
+            </ul>
+              {% endif %}
+
+                </div>
+
+                <div class="col-lg-4 " data-aos="fade-left">
+                </div>
+
+            </div>
+
+        </div>
+        <br><br>
+    </section><!-- End Pricing Section -->
 
 
-                                    </section>
-                                    <section>
-                                        <h2 class="text-secondary fw-bolder mb-4">교수님 상담 예약 현황</h2>
+    <!-- ======= Testimonials Section ======= -->
+    <section class="testimonials section-bg">
+        <div class="container" data-aos="fade-up">
+            <br>
 
-                                        <!-- 여기서부터 템플릿태그 -> if 이 내용이 있다면 이런식으로 들어가면됨 -->
-                                        <div class="card shadow border-0 rounded-4 mb-5">
-                                            <div class="card-body p-5">
-                                                <div class="row align-items-center gx-5">
-                                                    <div class="col text-center text-lg-start mb-4 mb-lg-0">
-                                                        <div class="bg-light p-4 rounded-4">
-                                                            <div class="text-primary fw-bolder mb-2">교수님 성함</div>
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-8">
-                                                        <div class="fw-bolder">목적</div>
-                                                        <br>
-                                                        <div>
-                                                            날짜
-                                                        </div>
-                                                        <br>
-                                                        <div class="text-muted">시간</div>
-                                                        <br>
-                                                    </div>
-
-                                                    <br>
-
-                                                    <!-- Download resume button-->
-                                                    <!-- Note: Set the link href target to a PDF file within your project-->
-                                                    <a class="btn btn-primary px-4 py-2 disabled" href="#!">
-
-                                                        승인상태
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </section>
-                                </div>
-                            </div>
+            <div class="row no-gutters">
+                <div class="col-xl-6 align-items-stretch order-1 order-lg-1">
+                    <div class="content flex-row flex-column justify-content-center">
+                        <div class="section-title">
+                            <h2>강의실 대여 현황</h2>
                         </div>
+                        <div class="row col-md-9">
+                            <div class="testimonial-item">
+                                <h3><i class="bx bx-buildings" style="color: gray;"></i> 강의실 1</h3>
+
+                                <p>
+                                    <i class="bx bx-alarm" style="color: gray;"></i> 날짜 / 시간
+                                </p>
+                                <h4><i class="bx bx-play" style="color: gray;"></i> 목적</h4>
+                            </div>
+                            <div class="testimonial-item">
+                                <h3><i class="bx bx-buildings" style="color: gray;"></i> 강의실 1</h3>
+
+                                <p>
+                                    <i class="bx bx-alarm" style="color: gray;"></i> 날짜 / 시간
+                                </p>
+                                <h4><i class="bx bx-play" style="color: gray;"></i> 목적</h4>
+                            </div>
+                            <div class="testimonial-item">
+                                <h3><i class="bx bx-buildings" style="color: gray;"></i> 강의실 1</h3>
+
+                                <p>
+                                    <i class="bx bx-alarm" style="color: gray;"></i> 날짜 / 시간
+                                </p>
+                                <h4><i class="bx bx-play" style="color: gray;"></i> 목적</h4>
+                            </div>
+                            <div class="testimonial-item">
+                                <h3><i class="bx bx-buildings" style="color: gray;"></i> 강의실 1</h3>
+
+                                <p>
+                                    <i class="bx bx-alarm" style="color: gray;"></i> 날짜 / 시간
+                                </p>
+                                <h4><i class="bx bx-play" style="color: gray;"></i> 목적</h4>
+                            </div>
+
+                        </div>
+                        <!-- Pagination -->
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item disabled">
+                                        <span class="page-link">&laquo;</span>
+                                    </li>
+                                    <li class="page-item active"><span class="page-link">1</span></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <!-- Add more page items as needed -->
+                                    <li class="page-item">
+                                        <a aria-label="Next" class="page-link" href="#">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                    </div>
+                     <br> <br> <br><br>
+                </div>
+
+                <div class="col-xl-6 align-items-stretch order-2 order-lg-2">
+                    <div class="content flex-row flex-column justify-content-center">
+                        <div class="section-title">
+                            <h2>교수님 상담 예약 현황</h2>
+                        </div>
+                        <div class="row col-md-9">
+                            {% if reservations %}
+                                {% for reservation in reservations %}
+                                    <div class="testimonial-item">
+                                        <h3><i class="bx bx-user" style="color: gray;"></i>
+                                            성함: {{ reservation.professor.user_name }} 교수님<br>
+
+                                            <i class="bi bi-geo-alt-fill" style="color:gray;"></i>
+                                             연구실: {{ reservation.professor.office_building }} -
+                                            {{ reservation.professor.office_room_number }}호<br>
+
+                                        </h3>
+
+                                        <p>
+                                            <i class="bx bx-calendar" style="color: gray;"></i>
+                                             {{ reservation.date }} / {{ reservation.time }} <br>
+                                        </p>
+                                        <h4><i class="bx bx-play" style="color: gray;"></i> 목적</h4>
+                                         {{ reservation.reason }}
+                                        <br><br>
+                                        {% if reservation.status == 'accepted' %}
+                                            <a class="btn px-4 py-2 " style="background-color: blue;color:white;" href="#">
+                                                {{ reservation.get_status_display_korean }}
+                                            </a>
+                                        {% elif reservation.status == 'rejected' %}
+                                            <a class="btn px-4 py-2 " style="background-color: red;color:white;" href="#">
+                                                {{ reservation.get_status_display_korean }}
+                                            </a>
+                                        {% else %}
+                                            <a class="btn px-4 py-2 " style="background-color: green;color:white;" href="#">
+                                                {{ reservation.get_status_display_korean }}
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+
+                        <!-- Pagination -->
+<!--                        <nav aria-label="Page navigation" >-->
+<!--                            <ul class="pagination justify-content-center">-->
+<!--                                {% for page_num in reservation_pages %}-->
+<!--                                    <li class="page-item {% if page_num == reservation_page.number %}active{% endif %}">-->
+<!--                                        <a class="page-link" href="?reservation_page={{ page_num }}">{{ page_num }}</a>-->
+<!--                                    </li>-->
+<!--                                {% endfor %}-->
+<!--                            </ul>-->
+<!--                        </nav>-->
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                {% if reservations.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page=1" aria-label="First">
+                                            <span aria-hidden="true">&laquo;&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ reservations.previous_page_number }}" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <span class="page-link">&laquo;&laquo;</span>
+                                    </li>
+                                    <li class="page-item disabled">
+                                        <span class="page-link">&laquo;</span>
+                                    </li>
+                                {% endif %}
+
+                                <li class="page-item active">
+                                    <span class="page-link">{{ reservations.number }}</span>
+                                </li>
+
+                                {% if reservations.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ reservations.next_page_number }}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ reservations.paginator.num_pages }}" aria-label="Last">
+                                            <span aria-hidden="true">&raquo;&raquo;</span>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <span class="page-link">&raquo;</span>
+                                    </li>
+                                    <li class="page-item disabled">
+                                        <span class="page-link">&raquo;&raquo;</span>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+
                     </div>
                 </div>
             </div>
-            <div><div></div>
-            </div>
-        </div>
 
-    </section>
+
+        </div>
+        <br>
+    </section><!-- End Testimonials Section -->
+
 
 </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
 <footer id="footer">
 
-    <section class="breadcrumbs">
-        <div class="container">
-
-
-        </div>
-    </section><!-- End Breadcrumbs Section -->
 
     <div class="footer-top">
         <div class="container">
@@ -314,8 +407,8 @@
                 <div class="col-lg-3 col-md-6 footer-links">
                     <h4>Our Services</h4>
                     <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Rantal Lecture hall</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Professor consultation reservation</a>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Rantal Lecture Room</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Professor Consultation Reservation</a>
                         </li>
                         <li><i class="bx bx-chevron-right"></i> <a href="/board">Community</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a href="#">MyPage</a></li>
@@ -334,8 +427,10 @@
                                 class="bx bxl-youtube"></i></a>
 
                         <br><br><br>
-      <p class="logo"><img alt="덕성여자대학교" width="170" height="40" src="{% static 'single_pages/assets/img/footer_logo.png' %}"
-                                 ></p>
+                        <p class="logo"><img alt="덕성여자대학교" height="40"
+                                             src="{% static 'single_pages/assets/img/footer_logo.png' %}"
+                                             width="165"
+                        ></p>
                     </div>
                 </div>
 
@@ -345,7 +440,7 @@
 
 </footer><!-- End Footer -->
 
-<a class="back-to-top d-flex align-items-center justify-content-center" href="#"><i
+<a class="back-to-top d-flex align-items-center justify-content-center" href="/mypage/"><i
         class="bi bi-arrow-up-short"></i></a>
 <!--href 바꾸세요-->
 

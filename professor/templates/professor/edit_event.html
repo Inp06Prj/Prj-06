@@ -5,6 +5,7 @@
 <html lang="en">
 
 <head>
+  <link rel="shortcut icon" type="image" href="{% static 'single_pages/assets/img/dukbookhi_logo2.png' %}">
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -24,6 +25,7 @@
   <link href="{% static 'single_pages/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
   <!-- Template Main CSS File -->
   <link href="{% static 'single_pages/assets/css/style.css' %}" rel="stylesheet">
+
   <link href="{% static 'single_pages/assets/css/style.css' %}" rel="stylesheet">
   <link href="{% static '/schedule/lib/fullcalendar-5.10.1/main.css' %}" rel='stylesheet' />
   <script src="{% static '/schedule/lib/fullcalendar-5.10.1/main.js' %}"></script>
@@ -52,9 +54,9 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto" href="/../pro/pro_schedule">Register schedule</a></li>
+          <li><a class="nav-link scrollto" href="/../pro/pro_schedule">Register Schedule</a></li>
           <li><a class="nav-link scrollto active" href="{% url 'pro_logout' %}">Logout</a></li>
-          <li><a class="getstarted scrollto" href="#features">MyPage</a></li>
+          <li><a class="getstarted scrollto" href="/pro/my_page">MyPage</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -77,15 +79,18 @@
 
       </div>
     </section><!-- End Breadcrumbs Section -->
-
     <section class="inner-page">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-6">
-            <form method="post" action="">
+            <form method="post" action="{% url 'edit_event' event.id %}">
               {% csrf_token %}
               {{ form.as_p }}
               <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+            <form method="post" action="{% url 'delete_schedule' event.id %}">
+              {% csrf_token %}
+              <input type="submit" class="btn btn-danger" value="Delete">
             </form>
           </div>
         </div>
@@ -94,13 +99,14 @@
 
   </main><!-- End #main -->
 
+
   <!-- ======= Footer ======= -->
   <footer id="footer">
 
-    <section class="breadcrumbs">
-      <div class="container">
-      </div>
-    </section><!-- End Breadcrumbs Section -->
+<!--    <section class="breadcrumbs">-->
+<!--      <div class="container">-->
+<!--      </div>-->
+<!--    </section>&lt;!&ndash; End Breadcrumbs Section &ndash;&gt;-->
 
     <div class="footer-top">
       <div class="container">
@@ -129,8 +135,8 @@
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Our Services</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Register schedule</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">MyPage</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/pro/pro_schedule">Register Schedule</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/pro/my_page">MyPage</a></li>
             </ul>
           </div>
 
@@ -141,7 +147,9 @@
               <a href="https://www.facebook.com/DukSungWU" class="facebook"><i class="bx bxl-facebook"></i></a>
               <a href="https://www.instagram.com/duksung_official/" class="instagram"><i class="bx bxl-instagram"></i></a>
               <a href="https://www.youtube.com/channel/UCrda7r7df_GPinyBULMA6CA" class="youtube"><i class="bx bxl-youtube"></i></a>
-            </div>
+           <br><br><br>
+      <p class="logo"><img alt="덕성여자대학교" width="165" height="40" src="{% static 'single_pages/assets/img/footer_logo.png' %}"
+                                 ></p> </div>
           </div>
 
         </div>

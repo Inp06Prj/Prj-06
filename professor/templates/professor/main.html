@@ -5,6 +5,7 @@
 <html lang="en">
 
 <head>
+  <link rel="shortcut icon" type="image" href="{% static 'single_pages/assets/img/dukbookhi_logo2.png' %}">
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -43,9 +44,9 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto" href="/../pro/pro_schedule">Register schedule</a></li>
+          <li><a class="nav-link scrollto" href="/../pro/pro_schedule">Register Schedule</a></li>
           <li><a class="nav-link scrollto active" href="{% url 'pro_logout' %}">Logout</a></li>
-          <li><a class="getstarted scrollto" href="#features">MyPage</a></li>
+          <li><a class="getstarted scrollto" href="/pro/my_page">MyPage</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -53,57 +54,43 @@
     </div>
   </header><!-- End Header -->
 
-  <main id="main">
+ <main id="main">
 
-    <!-- ======= Breadcrumbs Section ======= -->
-    <section class="breadcrumbs">
-      <div class="container">
 
-        <div class="d-flex justify-content-between align-items-center">
-          <h2>교수자 메인 페이지</h2>
-          <ol>
-            <li><a href="/pro/pro_main/">Main</a></li>
-            <li>교수자 메인 페이지</li>
-          </ol>
+ <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 d-lg-flex flex-lg-column justify-content-center align-items-stretch pt-5 pt-lg-0 order-2 order-lg-1" data-aos="fade-up">
+          <div>
+            {% if user %} {% with pro_user=request.user.pro_user %}
+              <h3><i class="bx bx-award"></i> {{ pro_user.major }} <i class="bx bx-award"></i></h3>
+              <h3>{{ user.username }} {{ pro_user.user_name }} 교수님 환영합니다.</h3>
+                  {% endwith %}
+            {% endif %}
+            <br>
+            <h2>개인 스케줄을 등록해주시고<br>마이페이지에서 상담 예약을 승인 또는 거부<br>해주시길 바랍니다.</h2>
+            <a href="/pro/pro_schedule" class="download-btn"><i class="bx bx-task"></i> 스케줄 등록</a>
+            <a href="/pro/my_page" class="download-btn"><i class="bx bx-user"></i> 마이페이지</a>
+          </div>
         </div>
+        <div class="col-lg-6 d-lg-flex flex-lg-column align-items-stretch order-1 order-lg-2 hero-img" data-aos="fade-up">
+<!--          <img src="assets/img/hero-img.png" class="img-fluid" alt="">-->
+          <img src="{% static 'single_pages/assets/img/promainn.png' %}" class="img-fluid" alt="">
 
+
+        </div>
       </div>
-    </section><!-- End Breadcrumbs Section -->
+    </div>
 
-    <section class="inner-page">
-      <div class="container">
-        <p>
-          {% if user %}
-              {% if pro_users %}
-                  {% for pro_user in pro_users %}
-                      {% if user.username == pro_user.user.username %}
-                          <h5>💗{{ pro_user.major }}💗</h5>
-                          <br>
-                          {{ user.username }} -
-                          {{ pro_user.user_name }} 교수님 환영합니다.
-                      {% endif %}
-                  {% endfor %}
-              {% endif %}
-          {% endif %}
-          <br><br>
-          스케줄을 등록해주시고, 상담 예약을 승인 또는 거부 해주시길 바랍니다.
-        </p>
-      </div>
-    </section>
+  </section><!-- End Hero -->
 
-  </main><!-- End #main -->
+
+</main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
-
-    <section class="breadcrumbs">
-      <div class="container">
-
-
-
-      </div>
-    </section><!-- End Breadcrumbs Section -->
-
     <div class="footer-top">
       <div class="container">
         <div class="row">
@@ -131,8 +118,8 @@
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Our Services</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="/pro/pro_schedule/">Register schedule</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">MyPage</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/pro/pro_schedule/">Register Schedule</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/pro/my_page">MyPage</a></li>
             </ul>
           </div>
 
@@ -143,6 +130,9 @@
               <a href="https://www.facebook.com/DukSungWU" class="facebook"><i class="bx bxl-facebook"></i></a>
               <a href="https://www.instagram.com/duksung_official/" class="instagram"><i class="bx bxl-instagram"></i></a>
               <a href="https://www.youtube.com/channel/UCrda7r7df_GPinyBULMA6CA" class="youtube"><i class="bx bxl-youtube"></i></a>
+            <br><br><br>
+                              <p class="logo"><img alt="덕성여자대학교" width="165" height="40" src="{% static 'single_pages/assets/img/footer_logo.png' %}"
+                               ></p>
             </div>
           </div>
 

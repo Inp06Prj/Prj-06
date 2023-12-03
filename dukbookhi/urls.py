@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -12,6 +14,9 @@ urlpatterns = [
     path('board/', include('board.urls')), # 게시판 기능 <- 학생만 접근 가능
 
     path('pro/', include('professor.urls')), # 교수님 로그인 기능 + 교수님 시간 예약 등 교수님의 정보
-
+    # path('room/', include('room.urls')),
     
 ]
+
+# if settings.DEBUG:
+#     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

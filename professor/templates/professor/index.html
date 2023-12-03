@@ -5,6 +5,7 @@
 <html lang="en">
 
 <head>
+  <link rel="shortcut icon" type="image" href="{% static 'single_pages/assets/img/dukbookhi_logo2.png' %}">
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -25,6 +26,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{% static 'single_pages/assets/css/style.css' %}" rel="stylesheet">
+
   <link href="{% static '/schedule/lib/fullcalendar-5.10.1/main.css' %}" rel='stylesheet' />
   <script src="{% static '/schedule/lib/fullcalendar-5.10.1/main.js' %}"></script>
   <script src="{% static '/schedule/lib/util.js' %}"></script>
@@ -43,7 +45,8 @@
         navLinks: true,
         dayMaxEvents: true,
         selectable: true,
-        timeFormat: 'h:mm a', // 시간 형식을 변경
+<!--        timeFormat: 'h:mm a', // 시간 형식을 변경-->
+        timeFormat: 'HH:mm',
 
 
 
@@ -184,8 +187,6 @@
 
       <div class="logo">
         <h1><a href="/pro/pro_main">DukBookHi</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
       {% if user %}
           {{ user.username }} -
@@ -198,7 +199,7 @@
         <ul>
           <li><a class="nav-link scrollto" href="/../pro/pro_schedule">Register schedule</a></li>
           <li><a class="nav-link scrollto active" href="{% url 'pro_logout' %}">Logout</a></li>
-          <li><a class="getstarted scrollto" href="#features">MyPage</a></li>
+          <li><a class="getstarted scrollto" href="/pro/my_page">MyPage</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -237,13 +238,10 @@
   <!-- ======= Footer ======= -->
   <footer id="footer">
 
-    <section class="breadcrumbs">
-      <div class="container">
-
-
-
-      </div>
-    </section><!-- End Breadcrumbs Section -->
+<!--    <section class="breadcrumbs">-->
+<!--      <div class="container">-->
+<!--      </div>-->
+<!--    </section>&lt;!&ndash; End Breadcrumbs Section &ndash;&gt;-->
 
     <div class="footer-top">
       <div class="container">
@@ -272,8 +270,8 @@
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Our Services</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Register schedule</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">MyPage</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/pro/pro_schedule">Register schedule</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="/pro/my_page">MyPage</a></li>
             </ul>
           </div>
 

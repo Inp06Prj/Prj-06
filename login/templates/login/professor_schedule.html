@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+
+{% load static %}
+<html lang="en">
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="shortcut icon" type="image" href="{% static 'single_pages/assets/img/dukbookhi_logo2.png' %}">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>덕북희 - 학생이 보는 {{ professor.user_name }} 교수님의 스케줄</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{% static 'single_pages/assets/img/favicon.png' %}" rel="icon">
+    <link href="{% static 'single_pages/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'single_pages/assets/vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'single_pages/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'single_pages/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'single_pages/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'single_pages/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'single_pages/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'single_pages/assets/css/style.css' %}" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="{% static 'single_pages/assets/css/style.css' %}" rel="stylesheet">
+
+    <!-- FullCalendar 관련 스크립트 및 스타일 추가 -->
+    <link href="{% static 'schedule/lib/fullcalendar-5.10.1/main.css' %}" rel='stylesheet' />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="{% static 'schedule/lib/fullcalendar-5.10.1/main.js' %}"></script>
+    <script src="{% static 'schedule/lib/util.js' %}"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+      font-size: 14px;
+    }
+    #loading {
+      display: none;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    #calendar {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 10px;
+    }
+  </style>
+
+
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header class="fixed-top " id="header">
+    <div class="container d-flex align-items-center justify-content-between">
+
+        <div class="logo">
+            <h1><a href="/stu/main">DukBookHi</a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        </div>
+
+        <nav class="navbar" id="navbar">
+            <ul>
+
+                <li class="dropdown"><a href="#"><span>Rantal Lecture Room</span> <i
+                        class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li class="dropdown"><a href="#"><span>차미리사 기념관</span> <i
+                                class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="#">1층</a></li>
+                                <li><a href="#">2층</a></li>
+                                <li><a href="#">3층</a></li>
+                                <li><a href="#">4층</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="#"><span>인문사회관</span> <i class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="#">1층</a></li>
+                                <li><a href="#">2층</a></li>
+                                <li><a href="#">3층</a></li>
+                                <li><a href="#">4층</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="#"><span>자연관</span> <i class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="#">1층</a></li>
+                                <li><a href="#">2층</a></li>
+                                <li><a href="#">3층</a></li>
+                                <li><a href="#">4층</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="#"><span>대강의동</span> <i class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="#">1층</a></li>
+                                <li><a href="#">2층</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="#"><span>Professor Consultation Reservation</span> <i
+                        class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li class="dropdown"><a href="#"><span>과학기술대학</span> <i class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="/stu/professors/">컴퓨터공학과</a></li>
+                                <li><a href="#">사이버보안학과</a></li>
+                                <li><a href="#">식품영양학과</a></li>
+                                <li><a href="#">바이오공학과</a></li>
+                                <li><a href="#">생활체육학과</a></li>
+                                <li><a href="#">화학과</a></li>
+                                <li><a href="#">수학과</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="#"><span>글로벌융합대학</span> <i class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="#">국어국문학과</a></li>
+                                <li><a href="#">영어영문학과</a></li>
+                                <li><a href="#">경영학과</a></li>
+                                <li><a href="#">철학과</a></li>
+                                <li><a href="#">회계학과</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="nav-link scrollto" href="#faq">약학대학</a></li>
+                        <li class="dropdown"><a href="#"><span>Art & Desing 대학</span> <i
+                        class="bi bi-chevron-right"></i></a>
+                    <ul>
+                        <li><a href="#">동양화전공</a></li>
+                        <li><a href="#">서양화전공</a></li>
+                        <li><a href="#">실내디자인전공</a></li>
+                        <li><a href="#">시각디자인전공</a></li>
+                        <li><a href="#">텍스타일디자인전공</a></li>
+                    </ul>
+                </li>
+                    </ul>
+                </li>
+
+            </ul>
+            <ul>
+            <li><a class="nav-link scrollto" href="/board">Community</a></li>
+            <li><a class="nav-link scrollto active" href="{% url 'custom_logout' %}">Logout</a></li>
+            <li><a class="getstarted scrollto" href="/stu/my_page">MyPage</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
+    </div>
+</header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs Section ======= -->
+        <section class="breadcrumbs">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>{{ professor.user_name }} 교수님의 스케줄 표</h2>
+                    <ol>
+                        <li><a href="/stu/main/">Main</a></li>
+                        <li>{{ professor.user_name }} 교수님의 스케줄 표</li>
+                    </ol>
+                </div>
+            </div>
+        </section><!-- End Breadcrumbs Section --><br>
+        <div class="text-center" style="font-size:19px">
+            👨🏻‍🏫교수님과의 상담을 예약해보세요!👩🏻‍🏫<br>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            상담 예약
+        </button>
+        </div>
+
+        <section class="inner-page">
+            <div class="container" data-aos="fade-up">
+                <div id='loading'>loading...</div>
+                <div id='calendar'></div>
+            </div>
+        </section>
+
+<!--        &lt;!&ndash; Button trigger modal &ndash;&gt;-->
+<!--        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
+<!--            상담 예약-->
+<!--        </button>-->
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form method="post" action="{% url 'create_reservation' professor_id=professor.id %}">
+                        {% csrf_token %}
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">상담 예약</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <label for="reservation_date">예약 날짜:</label><br>
+                            <input type="date" id="reservation_date" name="reservation_date" required><br>
+
+                            <label for="reservation_time">예약 시간: </label><br>
+                            <input type="time" id="reservation_time" name="reservation_time" required><br>
+
+                            <label for="reservation_reason">예약 사유:</label><br>
+                            <textarea id="reservation_reason" name="reservation_reason" required></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">예약 신청</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- JavaScript to set default date and time -->
+        <script>
+            // JavaScript code to set default date and time
+            function setDefaultDateTime() {
+                var today = new Date();
+
+                // Set default date
+                var formattedDate = today.toISOString().split('T')[0];
+                document.getElementById('reservation_date').value = formattedDate;
+
+                // Set default time
+                var hours = today.getHours().toString().padStart(2, '0');
+                var minutes = today.getMinutes().toString().padStart(2, '0');
+                var defaultTime = hours + ':' + minutes;
+                document.getElementById('reservation_time').value = defaultTime;
+            }
+
+            // Call the function when the page is loaded
+            document.addEventListener('DOMContentLoaded', setDefaultDateTime);
+        </script>
+
+        <!-- Initiate FullCalendar -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var calendarEl = document.getElementById('calendar');
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    headerToolbar: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                    },
+                    events: "{% url 'get_professor_events' professor.id %}",
+                    loading: function (bool) {
+                        document.getElementById('loading').style.display =
+                            bool ? 'block' : 'none';
+                    }
+                });
+                calendar.render();
+            });
+        </script>
+
+    </main><!-- End #main -->
+<!-- ======= Footer ======= -->
+<footer id="footer">
+
+<!--    <section class="breadcrumbs">-->
+<!--        <div class="container">-->
+
+
+<!--        </div>-->
+<!--    </section>&lt;!&ndash; End Breadcrumbs Section &ndash;&gt;-->
+
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-6 footer-contact">
+                    <h3>Duksung Women's University</h3>
+                    <p>
+                        01369|서울 도봉구 삼양로144길 33<br>
+                        (쌍문동, 덕성여자대학교)|덕성여자대학교<br><br>
+                        <strong>Phone:</strong> (ARS) 02-901-8000<br>
+                        <strong>Email:</strong> webmaster@duksung.ac.kr<br>
+                    </p>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="https://www.duksung.ac.kr/main.do">Duksung
+                            Homepage</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="https://lms.duksung.ac.kr/">Duksung
+                            E-class</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a
+                                href="https://sso.duksung.ac.kr/svc/tk/Auth.do?ac=Y&ifa=N&id=portal&">Duksung
+                            Potal</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Rantal Lecture Room</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Professor Consultation Reservation</a>
+                        </li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/board">Community</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/stu/my_page">MyPage</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Duksung Social Networks</h4>
+                    <div class="social-links mt-3">
+                        <a class="blog" href="https://blog.naver.com/dswuniv_blog"><i class="bx bx-bold"></i></a>
+                        <a class="facebook" href="https://www.facebook.com/DukSungWU"><i
+                                class="bx bxl-facebook"></i></a>
+                        <a class="instagram" href="https://www.instagram.com/duksung_official/"><i
+                                class="bx bxl-instagram"></i></a>
+                        <a class="youtube" href="https://www.youtube.com/channel/UCrda7r7df_GPinyBULMA6CA"><i
+                                class="bx bxl-youtube"></i></a>
+                    <br><br><br>
+      <p class="logo"><img alt="덕성여자대학교" width="165" height="40" src="{% static 'single_pages/assets/img/footer_logo.png' %}"
+                              ></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</footer><!-- End Footer -->
+
+<a class="back-to-top d-flex align-items-center justify-content-center" href="/inner_page/"><i
+        class="bi bi-arrow-up-short"></i></a>
+<!--href 바꾸세요-->
+
+
+<!-- Vendor JS Files -->
+<script src="{% static 'single_pages/assets/vendor/aos/aos.js' %}"></script>
+<script src="{% static 'single_pages/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'single_pages/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+<script src="{% static 'single_pages/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+<script src="{% static 'single_pages/assets/vendor/php-email-form/validate.js' %}"></script>
+
+
+<!-- Template Main JS File -->
+<script src="{% static 'single_pages/assets/js/main.js' %}"></script>
+
+
+</body>
+
+</html>
