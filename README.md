@@ -6,7 +6,7 @@ DukBookHi란?
 
 
 
-# 😀 DukBookHi 팀원 소개
+# 🙌🏻 DukBookHi 팀원 소개 🙌🏻
 
 ### Back-end developer
 
