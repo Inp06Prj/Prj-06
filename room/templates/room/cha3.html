@@ -1,19 +1,74 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>차미리관 3층의 도면 혹은 강의실 목록</title>-->
+<!--    <style>-->
+<!--        .div1 {-->
+<!--            width: 300px;-->
+<!--            height: 100px;-->
+<!--            border: 1px solid blue;-->
+<!--            background-color: #384E80;-->
+<!--            margin-bottom: 10px;-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            justify-content: center;-->
+<!--            color: white;-->
+<!--            font-weight: bold;-->
+<!--            font-size: 1.2em;-->
+<!--        }-->
+
+<!--        .div1:hover {-->
+<!--            background-color: #0a5021;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+
+<!--<body>-->
+<!--    <h2>차미리관 3층의 도면 혹은 강의실 목록입니다</h2>-->
+
+<!--    {% for room in room_number %}-->
+<!--        <div class='div1' data-href="{% url 'reservation table' %}" onclick='divBtn();'>-->
+<!--            {{ room.room_number }}-->
+<!--        </div>-->
+<!--    {% endfor %}-->
+
+<!--    &lt;!&ndash; <ul>-->
+<!--        {% for room in lecture_rooms %}-->
+<!--            <li>{{ room.room_num }}</li>-->
+<!--        {% endfor %}-->
+<!--    </ul> &ndash;&gt;-->
+
+<!--    <script>-->
+<!--        function divBtn() {-->
+<!--            var div = document.querySelector('.div1');-->
+<!--            var href = div.getAttribute('data-href');-->
+<!--            if (href) {-->
+<!--                window.location.href = href;-->
+<!--            }-->
+<!--        }-->
+<!--    </script>-->
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
+
+
 {% load static %}
 <html lang="en">
 
 <head>
-    <link rel="shortcut icon" type="image" href="{% static 'single_pages/assets/img/dukbookhi_logo2.png' %}">
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>덕북희 - 과학기술대학 학과 리스트</title>
+    <title>덕북희 - 메인</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="{% static 'single_pages/assets/img/favicon.png' %}" rel="icon">
-    <link href="{% static 'single_pages/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+    <link href="{% static 'single_pages/assets/img/favicon.png" rel="icon">
+    <link href="{% static 'single_pages/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
 
     <!-- Google Fonts -->
@@ -31,45 +86,6 @@
 
     <!-- Template Main CSS File -->
     <link href="{% static 'single_pages/assets/css/style.css' %}" rel="stylesheet">
-    <!-- Template Main CSS File -->
-    <link href="{% static 'single_pages/assets/css/style.css' %}" rel="stylesheet">
-
-    <style>
-
-      table {
-        border-collapse: collapse;
-           display: flex;
-      justify-content: center;
-      align-items: center;
-
-      margin-top : 20px;
-      }
-
-
-
-      td {
-              height: 20px;
-              width: 120px;
-              padding: 5px;
-              text-align: center;
-      }
-
-      .possible:hover {
-      border: 1px solid lightgrey;
-              height: 20px;
-              width: 120px;
-              padding: 5px;
-              text-align: center;
-              background-color: lightgrey;
-      }
-
-      .selected {
-        background-color: #a0a0a0;
-      }
-
-
-
-    </style>
 
 
 </head>
@@ -82,22 +98,18 @@
 
         <div class="logo">
             <h1><a href="/stu/main">DukBookHi</a></h1>
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
         </div>
 
         <nav class="navbar" id="navbar">
             <ul>
 
-                <li class="dropdown"><a href="#"><span>Rantal Lecture Room</span> <i
-                        class="bi bi-chevron-down"></i></a>
+                <li class="dropdown"><a href="/room/collegeAndFloor/"><span>Rantal Lecture Room</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                        <li class="dropdown"><a href="#"><span>차미리사 기념관</span> <i
-                                class="bi bi-chevron-right"></i></a>
+                        <li class="dropdown"><a href="#"><span>차미리사 기념관</span> <i class="bi bi-chevron-right"></i></a>
                             <ul>
                                 <li><a href="#">1층</a></li>
                                 <li><a href="#">2층</a></li>
-                                <li><a href="#">3층</a></li>
+                                <li><a href="{% url '차미리관 3층' %}">3층</a></li>
                                 <li><a href="#">4층</a></li>
                             </ul>
                         </li>
@@ -125,7 +137,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="dropdown"><a href="#"><span>Professor Consultation Reservation</span> <i
+                <li class="dropdown"><a href="/room/collegeAndFloor/"><span>Professor Consultation Reservation</span> <i
                         class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li class="dropdown"><a href="#"><span>과학기술대학</span> <i class="bi bi-chevron-right"></i></a>
@@ -149,6 +161,7 @@
                             </ul>
                         </li>
                         <li><a class="nav-link scrollto" href="#faq">약학대학</a></li>
+
                         <li class="dropdown"><a href="#"><span>Art & Desing 대학</span> <i
                                 class="bi bi-chevron-right"></i></a>
                             <ul>
@@ -161,12 +174,9 @@
                         </li>
                     </ul>
                 </li>
-
-            </ul>
-            <ul>
                 <li><a class="nav-link scrollto" href="/board">Community</a></li>
                 <li><a class="nav-link scrollto active" href="{% url 'custom_logout' %}">Logout</a></li>
-                <li><a class="getstarted scrollto" href="/stu/my_page">MyPage</a></li>
+                <li><a class="getstarted scrollto" href="/stu/my_page/">MyPage</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
@@ -181,98 +191,69 @@
         <div class="container">
 
             <div class="d-flex justify-content-between align-items-center">
-                <h2>단과대 & 학과 선택</h2>
-                <p>상담을 원하는 교수님이 속한 단과대와 학과를 골라주세요.</p>
+                <h2>강의실 선택</h2>
                 <ol>
                     <li><a href="/stu/main/">Main</a></li>
                     <!--                        href바꾸세요-->
-                    <li>단과대 리스트</li>
-                    <li>과학기술대학 학과 리스트</li>
+                    <li>강의동 & 층 선택 / 강의실 선택</li>
                 </ol>
             </div>
 
         </div>
     </section><!-- End Breadcrumbs Section -->
-    <!--과 테이블-->
-    <table   data-aos="fade-up" id="timeTable">
-        <tr >
-            <td><a href="/stu/professors">
-                <img height="200" src="{% static 'professor/image/computer.png' %}" width="230">
-                <br>
-                <br>
-                <br>
-                컴퓨터공학과</a></td>
-            <td><a href="#">
-                <img height="200" src="{% static 'professor/image/cyber.png' %}" width="230">
-                <br>
-                <br>
-                <br>
-                사이버보안학과</a></td>
-            <td><a href="#">
-                <img height="200" src="{% static 'professor/image/software.png' %}" width="230">
-                <br>
-                <br>
-                <br>
-                소프트웨어학과</a></td>
-            <td><a href="#">
-                <img height="200" src="{% static 'professor/image/itmedia.png' %}" width="230">
-                <br>
-                <br>
-                <br>
-                IT미디어공학과</a></td>
-            <td><a href="#">
-                <img height="200" src="{%static 'professor/image/bio.png' %}" width="230">
-                <br>
-                <br>
-                <br>
-                바이오공학과</a></td>
-        </tr>
-        <tr >
-            <td><a href="#">
-                <img height="200" src="{%static 'professor/image/food.png' %}" width="230">
-                <br>
-                <br>
-                <br>
-                식품영양학과</a></td>
-            <td><a href="#">
-                <img height="200" src="{%static 'professor/image/physical.jpg' %}" width="230">
-                <br>
-                <br>
-                <br>
-                생활체육학과</a></td>
-            <td><a href="#">
-                <img height="200" src="{%static 'professor/image/math.png' %}" width="230">
-                <br>
-                <br>
-                <br>
-                수학과</a></td>
-            <td><a href="#">
-                <img height="200" src="{%static 'professor/image/chemi.jpg' %}" width="230">
-                <br>
-                <br>
-                <br>
-                화학과</a></td>
-            <td><a href="#">
-                <img height="200" src="{%static 'professor/image/statistics.jpg' %}" width="230">
-                <br>
-                <br>
-                <br>
-                정보통계학과</a></td>
-        </tr>
-    </table>
 
+    <!-- ======= App Features Section ======= -->
+    <section class="features" id="features">
+        <div class="container">
+
+
+
+
+            <div class="row no-gutters">
+                <div class="col-xl-5 d-flex justify-content-center order-2 order-lg-1">
+                    <div class="content d-flex flex-column">
+                        <div class="row">
+                            <div class="icon-box " data-aos="fade-up">
+                                <i class="bx bx-food-menu"></i>
+                                <h4>차미리사 기념관 3층</h4>
+                                <br>
+                                <a href="/room/roomReservationTable/"><p>319호</p></a>
+                                <a href="/main/"><p>320호</p></a>
+                                <a href="/main/"><p>321호</p></a>
+                                <a href="/main/"><p>323호</p></a>
+                                <a href="/main/"><p>324호</p></a>
+                                <a href="/main/"><p>325호</p></a>
+                                <a href="/main/"><p>326호</p></a>
+                                <a href="/main/"><p>336호</p></a>
+                                <a href="/main/"><p>337호</p></a>
+                                <a href="/main/"><p>338호</p></a>
+                                <a href="/main/"><p>339호</p></a>
+                                <a href="/main/"><p>340호</p></a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="image col-xl-7 d-flex align-items-stretch justify-content-center order-1 order-lg-2"
+                     data-aos="fade-left" data-aos-delay="100">
+                    <img alt="" src="{% static 'single_pages/assets/img/floor.jpg' %}">
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End App Features Section -->
 
 </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
 <footer id="footer">
 
-<!--    <section class="breadcrumbs">-->
-<!--        <div class="container">-->
+    <section class="breadcrumbs">
+        <div class="container">
 
 
-<!--        </div>-->
-<!--    </section>&lt;!&ndash; End Breadcrumbs Section &ndash;&gt;-->
+        </div>
+    </section><!-- End Breadcrumbs Section -->
 
     <div class="footer-top">
         <div class="container">
@@ -305,8 +286,8 @@
                 <div class="col-lg-3 col-md-6 footer-links">
                     <h4>Our Services</h4>
                     <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Rantal Lecture Room</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Professor Consultation Reservation</a>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/room/collegeAndFloor/">Rantal Lecture Room</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/stu/univ_and_major_list/">Professor Consultation Reservation</a>
                         </li>
                         <li><i class="bx bx-chevron-right"></i> <a href="/board">Community</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a href="/stu/my_page">MyPage</a></li>

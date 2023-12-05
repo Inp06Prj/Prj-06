@@ -45,12 +45,6 @@
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
-      {% if user %}
-          {{ user.username }} -
-          {% with pro_user=request.user.pro_user %}
-              {{ pro_user.user_name }} 교수님
-          {% endwith %}
-      {% endif %}
 
       <nav id="navbar" class="navbar">
         <ul>

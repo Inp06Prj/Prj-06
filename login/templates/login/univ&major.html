@@ -5,10 +5,12 @@
 <html lang="en">
 
 <head>
+    <link rel="shortcut icon" type="image" href="{% static 'single_pages/assets/img/dukbookhi_logo2.png' %}">
+
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>덕북희 - 메인</title>
+    <title>덕북희 - 단과대 리스트</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -67,13 +69,13 @@
         <nav class="navbar" id="navbar">
             <ul>
 
-                <li class="dropdown"><a href="#"><span>Rantal Lecture Room</span> <i class="bi bi-chevron-down"></i></a>
+                <li class="dropdown"><a href="/room/collegeAndFloor/"><span>Rantal Lecture Room</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li class="dropdown"><a href="#"><span>차미리사 기념관</span> <i class="bi bi-chevron-right"></i></a>
                             <ul>
                                 <li><a href="#">1층</a></li>
                                 <li><a href="#">2층</a></li>
-                                <li><a href="#">3층</a></li>
+                                <li><a href="{% url '차미리관 3층' %}">3층</a></li>
                                 <li><a href="#">4층</a></li>
                             </ul>
                         </li>
@@ -101,7 +103,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="dropdown"><a href="#"><span>Professor Consultation Reservation</span> <i
+                <li class="dropdown"><a href="/room/collegeAndFloor/"><span>Professor Consultation Reservation</span> <i
                         class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li class="dropdown"><a href="#"><span>과학기술대학</span> <i class="bi bi-chevron-right"></i></a>
@@ -183,7 +185,7 @@
                                                      class="card-img-top"
                                                      src="{% static 'single_pages/assets/img/computer.png' %}">
                                                 <div class="card-body">
-                                                    <h5 class="card-title"><hr>컴퓨터공학과</h5>
+                                                    <h6 class="card-title"><hr>컴퓨터공학과</h6>
                                                 </div>
                                             </a>
                                             </div>
@@ -192,80 +194,80 @@
 
                                         <div class="col-md-3">
                                             <br>
-                                            <div class="card "><a href="/professor_list/"><br>
+                                            <div class="card "><a href="#"><br>
                                                 <img alt="바이오공학과"
                                                      class="card-img-top"
                                                      src="{% static 'single_pages/assets/img/bio.png' %}">
                                                 <div class="card-body">
-                                                    <h5 class="card-title"><hr>바이오공학과</h5>
+                                                    <h6 class="card-title"><hr>바이오공학과</h6>
                                                 </div>
                                             </a>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <br>
-                                            <div class="card "><a href="/professor_list/"><br>
+                                            <div class="card "><a href="#"><br>
                                                 <img alt="정보통계학과"
                                                      class="card-img-top"
                                                      src="{% static 'single_pages/assets/img/statistics.jpg' %}">
                                                 <div class="card-body">
-                                                    <h5 class="card-title"><hr>정보통계학과</h5>
+                                                    <h6 class="card-title"><hr>정보통계학과</h6>
                                                 </div>
                                             </a>
                                             </div>
                                         </div>
                                         <div class="col-md-3" ><br>
-                                            <div class="card "><a href="/professor_list/"><br>
+                                            <div class="card "><a href="#"><br>
                                                 <img alt="수학과"
                                                      class="card-img-top"
                                                      src="{% static 'single_pages/assets/img/math.png' %}">
                                                 <div class="card-body">
-                                                    <hr><h5 class="card-title">수학과</h5>
+                                                    <hr><h6 class="card-title">수학과</h6>
                                                 </div>
                                             </a>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="card "><a href="/professor_list/"><br>
+                                            <div class="card "><a href="#"><br>
                                                 <img alt="생활체육학과"
                                                      class="card-img-top"
                                                      src="{% static 'single_pages/assets/img/physical.jpg' %}"><hr>
                                                 <div class="card-body">
-                                                    <h5 class="card-title">생활체육학과</h5>
+                                                    <h6 class="card-title">생활체육학과</h6>
                                                 </div>
                                             </a>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="card "><a href="/professor_list/"><br>
+                                            <div class="card "><a href="#"><br>
                                                 <img alt="사이버보안학과"
                                                      class="card-img-top"
                                                      src="{% static 'single_pages/assets/img/cyber.png' %}"><hr>
                                                 <div class="card-body">
-                                                    <h5 class="card-title">사이버보안학과</h5>
+                                                    <h6 class="card-title">사이버보안학과</h6>
                                                 </div>
                                             </a>
                                             </div>
                                         </div>
                                         <div class="col-md-3" >
-                                            <div class="card "><a href="/professor_list/"><br>
+                                            <div class="card "><a href="#"><br>
                                                 <img alt="IT미디어공학과"
                                                      class="card-img-top"
                                                      src="{% static 'single_pages/assets/img/itmedia.png' %}"><hr>
                                                 <div class="card-body">
-                                                    <h5 class="card-title">IT미디어공학과</h5>
+                                                    <h6 class="card-title">IT 미디어공학과</h6>
                                                 </div>
                                             </a>
                                             </div>
                                         </div>
 
                                         <div class="col-md-3 " >
-                                            <div class="card "><a href="/professor_list/"><br>
+                                            <div class="card "><a href="#"><br>
                                                 <img alt="식품영양학과"
                                                      class="card-img-top"
                                                      src="{% static 'single_pages/assets/img/food.png' %}"><hr>
                                                 <div class="card-body">
-                                                    <h5 class="card-title">식품영양학과</h5>
+                                                    <h6 class="card-title">식품영양학과</h6>
                                                 </div>
                                             </a>
                                             </div>
@@ -352,8 +354,8 @@
                 <div class="col-lg-3 col-md-6 footer-links">
                     <h4>Our Services</h4>
                     <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Rantal Lecture Room</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Professor Consultation Reservation</a>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/room/collegeAndFloor/">Rantal Lecture Room</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/stu/univ_and_major_list/">Professor Consultation Reservation</a>
                         </li>
                         <li><i class="bx bx-chevron-right"></i> <a href="/board">Community</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a href="/stu/my_page">MyPage</a></li>

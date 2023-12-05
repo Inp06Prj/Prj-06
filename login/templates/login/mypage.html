@@ -48,21 +48,16 @@
             <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
         </div>
 
-        {% if user %}
-            {{ user.username }} -
-            {{ user_profile.user_name }}
-        {% endif %}
-
         <nav class="navbar" id="navbar">
             <ul>
 
-                <li class="dropdown"><a href="#"><span>Rantal Lecture Room</span> <i class="bi bi-chevron-down"></i></a>
+                <li class="dropdown"><a href="/room/collegeAndFloor/"><span>Rantal Lecture Room</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li class="dropdown"><a href="#"><span>차미리사 기념관</span> <i class="bi bi-chevron-right"></i></a>
                             <ul>
                                 <li><a href="#">1층</a></li>
                                 <li><a href="#">2층</a></li>
-                                <li><a href="#">3층</a></li>
+                                <li><a href="{% url '차미리관 3층' %}">3층</a></li>
                                 <li><a href="#">4층</a></li>
                             </ul>
                         </li>
@@ -90,7 +85,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="dropdown"><a href="#"><span>Professor Consultation Reservation</span> <i
+                <li class="dropdown"><a href="/room/collegeAndFloor/"><span>Professor Consultation Reservation</span> <i
                         class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li class="dropdown"><a href="#"><span>과학기술대학</span> <i class="bi bi-chevron-right"></i></a>
@@ -203,61 +198,72 @@
                         <div class="section-title">
                             <h2>강의실 대여 현황</h2>
                         </div>
+                        {% for room_calendar_event in room_calendar_events %}
                         <div class="row col-md-9">
                             <div class="testimonial-item">
-                                <h3><i class="bx bx-buildings" style="color: gray;"></i> 강의실 1</h3>
-
+                                <h3><i class="bx bx-buildings" style="color: gray;"></i>{{ room_calendar_event.title }}</h3>
                                 <p>
-                                    <i class="bx bx-alarm" style="color: gray;"></i> 날짜 / 시간
+                                    <i class="bx bx-alarm" style="color: gray;"></i> 시작 시간 / 끝나는 시간<br>
+                                    {{room_calendar_event.date }} / {{ room_calendar_event.start }} - {{ room_calendar_event.end }}
                                 </p>
-                                <h4><i class="bx bx-play" style="color: gray;"></i> 목적</h4>
                             </div>
-                            <div class="testimonial-item">
-                                <h3><i class="bx bx-buildings" style="color: gray;"></i> 강의실 1</h3>
-
-                                <p>
-                                    <i class="bx bx-alarm" style="color: gray;"></i> 날짜 / 시간
-                                </p>
-                                <h4><i class="bx bx-play" style="color: gray;"></i> 목적</h4>
-                            </div>
-                            <div class="testimonial-item">
-                                <h3><i class="bx bx-buildings" style="color: gray;"></i> 강의실 1</h3>
-
-                                <p>
-                                    <i class="bx bx-alarm" style="color: gray;"></i> 날짜 / 시간
-                                </p>
-                                <h4><i class="bx bx-play" style="color: gray;"></i> 목적</h4>
-                            </div>
-                            <div class="testimonial-item">
-                                <h3><i class="bx bx-buildings" style="color: gray;"></i> 강의실 1</h3>
-
-                                <p>
-                                    <i class="bx bx-alarm" style="color: gray;"></i> 날짜 / 시간
-                                </p>
-                                <h4><i class="bx bx-play" style="color: gray;"></i> 목적</h4>
-                            </div>
-
                         </div>
+                        {% endfor %}
                         <!-- Pagination -->
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination justify-content-center">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                {% if room_calendar_events.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page=1" aria-label="First">
+                                            <span aria-hidden="true">&laquo;&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ room_calendar_events.previous_page_number }}" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <span class="page-link">&laquo;&laquo;</span>
+                                    </li>
                                     <li class="page-item disabled">
                                         <span class="page-link">&laquo;</span>
                                     </li>
-                                    <li class="page-item active"><span class="page-link">1</span></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <!-- Add more page items as needed -->
+                                {% endif %}
+
+                                {% for page_num in room_calendar_events.paginator.page_range %}
+                                    <li class="page-item {% if page_num == room_calendar_events.number %}active{% endif %}">
+                                        <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                                    </li>
+                                {% endfor %}
+
+                                {% if reservations.has_next %}
                                     <li class="page-item">
-                                        <a aria-label="Next" class="page-link" href="#">
+                                        <a class="page-link" href="?page={{ room_calendar_events.next_page_number }}" aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
                                     </li>
-                                </ul>
-                            </nav>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ room_calendar_events.paginator.num_pages }}" aria-label="Last">
+                                            <span aria-hidden="true">&raquo;&raquo;</span>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <span class="page-link">&raquo;</span>
+                                    </li>
+                                    <li class="page-item disabled">
+                                        <span class="page-link">&raquo;&raquo;</span>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
                     </div>
                      <br> <br> <br><br>
                 </div>
+
+
 
                 <div class="col-xl-6 align-items-stretch order-2 order-lg-2">
                     <div class="content flex-row flex-column justify-content-center">
@@ -269,10 +275,10 @@
                                 {% for reservation in reservations %}
                                     <div class="testimonial-item">
                                         <h3><i class="bx bx-user" style="color: gray;"></i>
-                                            성함: {{ reservation.professor.user_name }} 교수님<br>
+                                            {{ reservation.professor.user_name }} 교수님<br>
 
                                             <i class="bi bi-geo-alt-fill" style="color:gray;"></i>
-                                             연구실: {{ reservation.professor.office_building }} -
+                                             {{ reservation.professor.office_building }} -
                                             {{ reservation.professor.office_room_number }}호<br>
 
                                         </h3>
@@ -281,8 +287,8 @@
                                             <i class="bx bx-calendar" style="color: gray;"></i>
                                              {{ reservation.date }} / {{ reservation.time }} <br>
                                         </p>
-                                        <h4><i class="bx bx-play" style="color: gray;"></i> 목적</h4>
-                                         {{ reservation.reason }}
+                                        <h4><i class="bx bx-play" style="color: gray;"></i>{{ reservation.reason }}</h4>
+
                                         <br><br>
                                         {% if reservation.status == 'accepted' %}
                                             <a class="btn px-4 py-2 " style="background-color: blue;color:white;" href="#">
@@ -301,17 +307,7 @@
                                 {% endfor %}
                             {% endif %}
                         </div>
-
                         <!-- Pagination -->
-<!--                        <nav aria-label="Page navigation" >-->
-<!--                            <ul class="pagination justify-content-center">-->
-<!--                                {% for page_num in reservation_pages %}-->
-<!--                                    <li class="page-item {% if page_num == reservation_page.number %}active{% endif %}">-->
-<!--                                        <a class="page-link" href="?reservation_page={{ page_num }}">{{ page_num }}</a>-->
-<!--                                    </li>-->
-<!--                                {% endfor %}-->
-<!--                            </ul>-->
-<!--                        </nav>-->
                         <nav aria-label="Page navigation">
                             <ul class="pagination justify-content-center">
                                 {% if reservations.has_previous %}
@@ -334,9 +330,11 @@
                                     </li>
                                 {% endif %}
 
-                                <li class="page-item active">
-                                    <span class="page-link">{{ reservations.number }}</span>
-                                </li>
+                                {% for page_num in reservations.paginator.page_range %}
+                                    <li class="page-item {% if page_num == reservations.number %}active{% endif %}">
+                                        <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                                    </li>
+                                {% endfor %}
 
                                 {% if reservations.has_next %}
                                     <li class="page-item">
@@ -407,11 +405,11 @@
                 <div class="col-lg-3 col-md-6 footer-links">
                     <h4>Our Services</h4>
                     <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Rantal Lecture Room</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Professor Consultation Reservation</a>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/room/collegeAndFloor/">Rantal Lecture Room</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/stu/univ_and_major_list/">Professor Consultation Reservation</a>
                         </li>
                         <li><i class="bx bx-chevron-right"></i> <a href="/board">Community</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">MyPage</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/stu/my_page">MyPage</a></li>
                     </ul>
                 </div>
 

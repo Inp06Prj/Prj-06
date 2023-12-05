@@ -1,6 +1,7 @@
 from datetime import date
 
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.http import JsonResponse, HttpResponseNotFound, HttpResponseBadRequest, HttpResponseNotAllowed
 from .models import Calendar
 import json
@@ -73,12 +74,36 @@ def my_page(request):
         pro_user = Pro_User.objects.get(user=request.user)
 
         reservations = Reserve.objects.filter(professor=pro_user)
-        context = {'user': request.user, 'pro_user': pro_user, 'reservations': reservations}
+        page_number = request.GET.get('page', 1)
+        paginator = Paginator(reservations, 4)  # Show 10 reservations per page
+        page_obj = paginator.get_page(page_number)
+        # context = {'user': request.user, 'pro_user': pro_user, 'reservations': reservations}
+        context = {'user': request.user, 'pro_user': pro_user, 'reservations': page_obj}
 
         # context = {'user': request.user, 'pro_user': pro_user}
         return render(request, 'professor/my_page.html', context)
     else:
         return redirect(reverse('pro_login'))
+
+
+# @login_required(login_url='custom_login')
+# def my_page(request):
+#     user = request.user
+#     user_profile, created = UserProfile.objects.get_or_create(user=user)
+#
+#     # 여름님 코드
+#     reservations = Reserve.objects.filter(student=user_profile).order_by('date')
+#
+#     # Add pagination to the reservations
+#     page_number = request.GET.get('page', 1)
+#     paginator = Paginator(reservations, 4)  # Show 10 reservations per page
+#     page_obj = paginator.get_page(page_number)
+#
+#     professor = Pro_User.objects.all()
+#     context = {'user_profile': user_profile, 'reservations': page_obj, 'professor': professor}
+#
+#     # context = {'user_profile': user_profile}
+#     return render(request, 'login/mypage.html', context)
 
 
 # 교수님이 따로 자신의 스케줄을 등록

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+{% load static %}
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/menu_layout}">
+<head>
+    <title>스케줄 수정</title>
+    <link th:href="@{/css/manager_list.css}" rel="stylesheet"/>
+    <!-- jquery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- fullcalendar CDN -->
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet'/>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
+   
+    <script>
+ 
+        document.addEventListener('DOMContentLoaded', function (){
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+        },
+        initialDate: "{{ today_ymd }}",
+        editable: true,
+        navLinks: true,
+        dayMaxEvents: true,
+        selectable: true,
+<!--        timeFormat: 'h:mm a', // 시간 형식을 변경-->
+        timeFormat: 'HH:mm',
+
+
+
+      select: function (event) {
+            //   let titleOptions = ['수업', '점심', '출장', '회의', '귀가']; // Add your desired title options
+
+              // Use a dropdown for the title input
+              let inputString = prompt("학생 번호 입력 : ", titleOptions[0]);
+              if (inputString !== null && inputString.trim() !== "") {
+                // Show time input prompts continuously
+                let selectedDate = event.startStr;
+
+                function getTimeInput() {
+                  let startTime = prompt(`시작 시간 입력 (HH:mm) for ${selectedDate}:`);
+                  let endTime = prompt(`끝나는 시간 입력 (HH:mm) for ${selectedDate}:`);
+
+                  // Parse the input to create a Date object
+                  startTime = new Date(`${selectedDate.split('T')[0]}T${startTime}`);
+                  endTime = new Date(`${selectedDate.split('T')[0]}T${endTime}`);
+
+                  // Check if start and end times are provided and valid
+                  if (!isNaN(startTime.getTime()) && !isNaN(endTime.getTime())) {
+                    const xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function () {
+                      // Rest of your existing code...
+
+                      if (this.status === 200) {
+                        const res = JSON.parse(this.responseText);
+                        if (res.result === "success" && res.eventId !== null && res.eventId !== "") {
+                          console.log("Event added successfully:", res);
+                          calendar.addEvent({
+                            id: res.eventId,
+                            title: inputString,
+                            start: startTime,
+                            end: endTime,
+                          });
+
+                          // Add automatic page refresh
+                          location.reload();
+                        } else {
+                          console.error("스케줄 등록 실패 Server response:", res);
+                        }
+                      } else {
+                        console.error("서버 에러. Status code:", this.status);
+                      }
+                    };
+
+                    xhr.open("POST", '/pro/set_all_day_event/');
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+                    xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
+
+                    xhr.send(JSON.stringify({
+                      title: inputString,
+                      start: startTime.toISOString(),
+                      end: endTime.toISOString(),
+                      allDay: false,
+                    }));
+                  } else {
+                    alert("잘못된 시작 또는 종료 시간입니다. 다시 시도해주세요.");
+                  }
+                }
+
+                // Call the getTimeInput function until valid times are provided
+                getTimeInput();
+              } else {
+                alert("잘못된 제목입니다. 다시 시도해주세요.");
+              }
+            },
+
+
+              eventClick: function (event) {
+                const eventId = event.event._def.publicId;
+                const eventName = event.event._def.title;
+
+                window.location.href = "../../pro/edit_event/" + eventId + "/";
+
+                if (!window.opener) {
+                  window.opener.location.reload();
+                }
+              },
+
+              events: {
+                url: '/pro/get_events/',
+                failure: function () {
+                  document.getElementById('script-warning').style.display = 'block';
+                }
+              },
+              loading: function (bool) {
+                document.getElementById('loading').style.display =
+                  bool ? 'block' : 'none';
+              }
+            });
+
+            calendar.render();
+        })

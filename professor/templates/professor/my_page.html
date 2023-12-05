@@ -45,16 +45,13 @@
 
         <div class="logo">
             <h1><a href="/pro/pro_main">DukBookHi</a></h1>
-            <!--        경로 바꿔주세요-->
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
         </div>
 
         <nav class="navbar" id="navbar">
             <ul>
                 <li><a class="nav-link scrollto" href="/../pro/pro_schedule">Register Schedule</a></li>
                 <li><a class="nav-link scrollto active" href="{% url 'pro_logout' %}">Logout</a></li>
-                <li><a class="getstarted scrollto" href="/mypage/">MyPage</a></li>
+                <li><a class="getstarted scrollto" href="#">MyPage</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
@@ -119,45 +116,92 @@
                 <h2>Incoming Request</h2>
                 <p>이곳에서 학생들이 보낸 요청을 확인할 수 있습니다.</p>
             </div>
-            <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-                <div class="swiper-wrapper">
+            <div data-aos="fade-up" data-aos-delay="100">
                     {% if reservations %}
                         {% for reservation in reservations %}
-                            <div class="swiper-slide">
-                                <div class="testimonial-item">
-                                    <h3><i class="bx bx-user" style="color: gray;"></i> 상담 신청 {{ reservation.id }} </h3>
-                                    이름: {{ reservation.student.user_name }}<br>
-                                    전공: {{ reservation.student.major }}<br>
-                                    학번: {{ reservation.student.user.username }} <br>
-                                    <h3><i class="bx bx-alarm" style="color: gray;"></i> 날짜 / 시간</h3>
-                                    {{ reservation.date }} / {{ reservation.time }} <br>
-                                    <h3><i class="bx bx-play" style="color: gray;"></i> 목적 </h3>
-                                    {{ reservation.reason }}
-                                    <br><br>
-                                    <!-- 예약 상태 표시 -->
-                                    <p>승인 상태 : {{ reservation.get_status_display_korean }}</p>
-                                    <!-- 예약 상태에 따라 버튼 표시 -->
-                                    {% if reservation.status == 'pending' %}
-    <!--                                    <button class="btn btn-primary btn-accept" data-reservation-id="{{ reservation.id }}">수락</button>-->
-    <!--                                    <button class="btn btn-danger btn-reject" data-reservation-id="{{ reservation.id }}">거절</button>-->
-                                    <!--예약 수락-->
-                                        <form method="post" action="{% url 'update_reservation_status' reservation.id 'accepted' %}">
+                            <div class="testimonial-item">
+                                <h3><i class="bx bx-user" style="color: gray;"></i> 상담 신청 {{ reservation.id }} </h3>
+                                이름: {{ reservation.student.user_name }} /
+                                전공: {{ reservation.student.major }} /
+                                학번: {{ reservation.student.user.username }} <br>
+                                <h3><i class="bx bx-alarm" style="color: gray;"></i> 날짜 / 시간</h3>
+                                {{ reservation.date }} / {{ reservation.time }} <br>
+                                <h3><i class="bx bx-play" style="color: gray;"></i> 목적 </h3>
+                                {{ reservation.reason }}
+                                <br>
+                                <!-- 예약 상태 표시 -->
+                                <p>승인 상태 : {{ reservation.get_status_display_korean }}</p>
+                                <!-- 예약 상태에 따라 버튼 표시 -->
+                                {% if reservation.status == 'pending' %}
+                                    <!-- 예약 수락 및 거절 버튼 -->
+                                    <form class="d-inline" method="post" action="{% url 'update_reservation_status' reservation.id 'accepted' %}">
                                         {% csrf_token %}
                                         <button class="btn btn-primary" type="submit">수락</button>
-                                        </form>
-                                      <!-- 예약 거절 버튼 -->
-                                      <form method="post" action="{% url 'update_reservation_status' reservation.id 'rejected' %}">
+                                    </form>
+
+                                    <form class="d-inline" method="post" action="{% url 'update_reservation_status' reservation.id 'rejected' %}">
                                         {% csrf_token %}
                                         <button class="btn btn-danger" type="submit">거절</button>
-                                      </form>
-                                    {% endif %}
-                                </div>
+                                    </form>
+                                {% endif %}
                             </div>
                         {% endfor %}
+                        <!-- Pagination -->
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                <!-- First and Previous page links -->
+                                {% if reservations.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page=1" aria-label="First">
+                                            <span aria-hidden="true">&laquo;&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ reservations.previous_page_number }}" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <span class="page-link">&laquo;&laquo;</span>
+                                    </li>
+                                    <li class="page-item disabled">
+                                        <span class="page-link">&laquo;</span>
+                                    </li>
+                                {% endif %}
+
+                                <!-- Page numbers -->
+                                {% for page_num in reservations.paginator.page_range %}
+                                    <li class="page-item {% if page_num == reservations.number %}active{% endif %}">
+                                        <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                                    </li>
+                                {% endfor %}
+
+                                <!-- Next and Last page links -->
+                                {% if reservations.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ reservations.next_page_number }}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ reservations.paginator.num_pages }}" aria-label="Last">
+                                            <span aria-hidden="true">&raquo;&raquo;</span>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <span class="page-link">&raquo;</span>
+                                    </li>
+                                    <li class="page-item disabled">
+                                        <span class="page-link">&raquo;&raquo;</span>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
                     {% endif %}
                 </div>
             </div>
-        </div>
     </section><!-- End Testimonials Section -->
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -188,7 +232,7 @@
 <!--                    alert('상태 업데이트에 실패했습니다.');-->
 <!--                }-->
 <!--            });-->
-        }
+<!--        }-->
     });
 </script>
 
@@ -230,7 +274,7 @@
                 <div class="col-lg-3 col-md-6 footer-links">
                     <h4>Our Services</h4>
                     <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Register Schedule</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/../pro/pro_schedule">Register Schedule</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a href="#">MyPage</a></li>
                     </ul>
                 </div>

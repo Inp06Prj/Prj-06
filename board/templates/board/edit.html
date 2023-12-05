@@ -78,7 +78,7 @@
           <nav class="navbar" id="navbar">
             <ul>
 
-                <li class="dropdown"><a href="#"><span>Rantal Lecture Room</span> <i
+                <li class="dropdown"><a href="/room/collegeAndFloor/"><span>Rantal Lecture Room</span> <i
                         class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li class="dropdown"><a href="#"><span>차미리사 기념관</span> <i
@@ -86,7 +86,7 @@
                             <ul>
                                 <li><a href="#">1층</a></li>
                                 <li><a href="#">2층</a></li>
-                                <li><a href="#">3층</a></li>
+                                <li><a href="{% url '차미리관 3층' %}">3층</a></li>
                                 <li><a href="#">4층</a></li>
                             </ul>
                         </li>
@@ -114,7 +114,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="dropdown"><a href="#"><span>Professor Consultation Reservation</span> <i
+                <li class="dropdown"><a href="/room/collegeAndFloor/"><span>Professor Consultation Reservation</span> <i
                         class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li class="dropdown"><a href="#"><span>과학기술대학</span> <i class="bi bi-chevron-right"></i></a>
@@ -178,17 +178,6 @@
 
             </div>
         </section><!-- End Breadcrumbs Section -->
-
-<!--        <form method="post" action="{% url 'board:edit_board' board.id %}">-->
-<!--            {% csrf_token %}-->
-<!--            <label for="title">제목:</label>-->
-<!--            <input type="text" id="title" name="title" value="{{ board.title }}" required>-->
-<!--            <br>-->
-<!--            <label for="detail">내용:</label>-->
-<!--            <textarea id="detail" name="detail" rows="10" required>{{ board.content }}</textarea>-->
-<!--            <br>-->
-<!--            <input type="submit" value="수정하기">-->
-<!--        </form>-->
         <div class="container">
             <div class="content">
                 <form action="{% url 'board:edit_board' board_id=board.id %}" method="post" onsubmit="return validateForm();">
@@ -223,14 +212,6 @@
     <!-- ======= Footer ======= -->
     <footer id="footer">
 
-<!--        <section class="breadcrumbs">-->
-<!--            <div class="container">-->
-
-
-
-<!--            </div>-->
-<!--        </section>&lt;!&ndash; End Breadcrumbs Section &ndash;&gt;-->
-
         <div class="footer-top">
             <div class="container">
                 <div class="row">
@@ -262,11 +243,11 @@
                     <div class="col-lg-3 col-md-6 footer-links">
                         <h4>Our Services</h4>
                         <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Rantal Lecture Room</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Professor Consultation  Reservation</a>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/room/collegeAndFloor/">Rantal Lecture Room</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/stu/univ_and_major_list/">Professor Consultation Reservation</a>
                             </li>
                             <li><i class="bx bx-chevron-right"></i> <a href="/board">Community</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">MyPage</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/stu/my_page">MyPage</a></li>
                         </ul>
                     </div>
 

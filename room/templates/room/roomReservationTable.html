@@ -1,0 +1,540 @@
+<!--<!DOCTYPE html>-->
+<!--{% load static %}-->
+<!--<html lang="ko">-->
+
+<!--<head>-->
+<!--    <link rel="shortcut icon" type="image" href="{% static 'single_pages/assets/img/dukbookhi_logo2.png' %}">-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta content="width=device-width, initial-scale=1.0" name="viewport">-->
+
+<!--    <title>덕북희 - 교수자 스케줄 등록 페이지</title>-->
+<!--    <meta content="" name="description">-->
+<!--    <meta content="" name="keywords">-->
+
+<!--    &lt;!&ndash; Google Fonts &ndash;&gt;-->
+<!--    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">-->
+
+<!--    &lt;!&ndash; Vendor CSS Files &ndash;&gt;-->
+<!--    <link href="{% static 'single_pages/assets/vendor/aos/aos.css' %}" rel="stylesheet">-->
+<!--    <link href="{% static 'single_pages/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">-->
+<!--    <link href="{% static 'single_pages/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">-->
+<!--    <link href="{% static 'single_pages/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">-->
+<!--    <link href="{% static 'single_pages/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">-->
+<!--    <link href="{% static 'single_pages/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">-->
+
+<!--    &lt;!&ndash; Template Main CSS File &ndash;&gt;-->
+<!--    <link href="{% static 'single_pages/assets/css/style.css' %}" rel="stylesheet">-->
+
+<!--    <link href="{% static '/schedule/lib/fullcalendar-5.10.1/main.css' %}" rel='stylesheet' />-->
+<!--    <script src="{% static '/schedule/lib/fullcalendar-5.10.1/main.js' %}"></script>-->
+<!--    <script src="{% static '/schedule/lib/util.js' %}"></script>-->
+<!--</head>-->
+
+<!--<body>-->
+<!--    <div id='calendar'></div>-->
+<!--<script>-->
+<!--    var user_id = '{{ user_id }}';-->
+
+<!--        function getCookie(name) {-->
+<!--        var cookieValue = null;-->
+<!--        if (document.cookie && document.cookie !== '') {-->
+<!--            var cookies = document.cookie.split(';');-->
+<!--            for (var i = 0; i < cookies.length; i++) {-->
+<!--                var cookie = cookies[i].trim();-->
+<!--                if (cookie.substring(0, name.length + 1) === (name + '=')) {-->
+<!--                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));-->
+<!--                    break;-->
+<!--                }-->
+<!--            }-->
+<!--        }-->
+<!--        return cookieValue;-->
+<!--    }-->
+
+<!--    function getCurrentUserId() {-->
+<!--        // Use Django's request object to get user_id from session-->
+<!--        var user_id = '{{ request.user.id }}';  // Assuming user ID is stored in session-->
+<!--        console.log("현재 사용자 ID:", user_id);-->
+<!--        return user_id;-->
+<!--    }-->
+
+<!--        document.addEventListener('DOMContentLoaded', function () {-->
+<!--            var calendarEl = document.getElementById('calendar');-->
+
+<!--            var calendar = new FullCalendar.Calendar(calendarEl, {-->
+<!--                headerToolbar: {-->
+<!--                    left: 'prev,next today',-->
+<!--                    center: 'title',-->
+<!--                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'-->
+<!--                },-->
+<!--                editable: true,-->
+<!--                navLinks: true,-->
+<!--                dayMaxEvents: true,-->
+<!--                selectable: true,-->
+<!--                slotLabelFormat: {-->
+<!--                    hour: 'numeric',-->
+<!--                    minute: '2-digit',-->
+<!--                    hour12: false-->
+<!--                },-->
+<!--                select: function (event) {-->
+<!--                    let user_id = getCurrentUserId();-->
+<!--                    console.log("현재 이벤트에 대한 사용자 ID:", user_id);-->
+<!--                    let inputString = prompt("학생 번호와 빌리려는 강의실 호를 작성해주세요. ");-->
+<!--                    if (inputString !== null && inputString.trim() !== "") {-->
+<!--                        let selectedDate = event.startStr;-->
+
+<!--                function getTimeInput() {-->
+<!--                    let startTime = prompt(`시작 시간 입력 (HH:mm) for ${selectedDate}:`);-->
+<!--                    let endTime = prompt(`끝나는 시간 입력 (HH:mm) for ${selectedDate}:`);-->
+
+<!--                    try {-->
+<!--                        startTime = new Date(`${selectedDate.split('T')[0]}T${startTime}`);-->
+<!--                        endTime = new Date(`${selectedDate.split('T')[0]}T${endTime}`);-->
+
+<!--                        if (!isNaN(startTime.getTime()) && !isNaN(endTime.getTime())) {-->
+<!--                            const xhr = new XMLHttpRequest();-->
+<!--                            xhr.onreadystatechange = function () {-->
+<!--                                if (xhr.readyState === 4) {-->
+<!--                                    if (xhr.status === 200) {-->
+<!--                                        try {-->
+<!--                                            const res = JSON.parse(xhr.responseText);-->
+<!--                                            // Handle the response-->
+<!--                                            if (res.result === "success" && res.eventId !== null && res.eventId !== "") {-->
+<!--                                                console.log(user_id)-->
+<!--                                                console.log("Event added successfully:", res);-->
+
+<!--                                                calendar.addEvent({-->
+<!--                                                    id: res.eventId,-->
+<!--                                                    title: inputString,-->
+<!--                                                    start: startTime,-->
+<!--                                                    end: endTime,-->
+<!--                                                });-->
+<!--                                            } else {-->
+<!--                                                console.error("스케줄 등록 실패 Server response:", res);-->
+<!--                                            }-->
+<!--                                        } catch (error) {-->
+<!--                                            console.error("Error parsing JSON:", error);-->
+<!--                                        }-->
+<!--                                    } else {-->
+<!--                                        console.error("Server error. Status code:", xhr.status);-->
+<!--                                    }-->
+<!--                                }-->
+<!--                            };-->
+
+<!--                            xhr.open("POST", '/room/set_all_day_event/');-->
+<!--                            xhr.setRequestHeader('Content-Type', 'application/json');-->
+<!--                            xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));-->
+
+<!--                            xhr.send(JSON.stringify({-->
+<!--                                user_id: user_id,-->
+<!--                                title: inputString,-->
+<!--                                start: startTime.toISOString(),-->
+<!--                                end: endTime.toISOString(),-->
+<!--                                allDay: false,-->
+<!--                            }));-->
+<!--                        } else {-->
+<!--                            alert("잘못된 시작 또는 종료 시간입니다. 다시 시도해주세요.");-->
+<!--                        }-->
+<!--                    } catch (error) {-->
+<!--                        alert("잘못된 형식의 시간입니다. 다시 시도해주세요.");-->
+<!--                    }-->
+<!--                }-->
+
+
+<!--                        getTimeInput();-->
+<!--                    } else {-->
+<!--                        alert("잘못된 학생 번호입니다. 다시 시도해주세요.");-->
+<!--                    }-->
+<!--                },-->
+<!--                events: {-->
+<!--                    url: '/room/get_events/',-->
+<!--                    failure: function (e) {-->
+<!--                        console.error("Failed to fetch events:", e);-->
+<!--                        document.getElementById('script-warning').style.display = 'block';-->
+<!--                    }-->
+<!--                },-->
+<!--            });-->
+
+<!--            calendar.render();-->
+
+<!--        });-->
+<!--    </script>-->
+<!--</body>-->
+
+<!--</html>-->
+
+
+
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" type="image" href="{% static 'single_pages/assets/img/dukbookhi_logo2.png' %}">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>덕북희 - 메인</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{% static 'single_pages/assets/img/favicon.png' %}" rel="icon">
+    <link href="{% static 'single_pages/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'single_pages/assets/vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'single_pages/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'single_pages/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'single_pages/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'single_pages/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'single_pages/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'single_pages/assets/css/style.css' %}" rel="stylesheet">
+
+    <link href="{% static '/schedule/lib/fullcalendar-5.10.1/main.css' %}" rel='stylesheet' />
+    <script src="{% static '/schedule/lib/fullcalendar-5.10.1/main.js' %}"></script>
+    <script src="{% static '/schedule/lib/util.js' %}"></script>
+
+
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header class="fixed-top " id="header">
+    <div class="container d-flex align-items-center justify-content-between">
+
+        <div class="logo">
+            <h1><a href="/stu/main">DukBookHi</a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        </div>
+
+        <nav class="navbar" id="navbar">
+            <ul>
+
+                <li class="dropdown"><a href="/room/collegeAndFloor/"><span>Rantal Lecture Room</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li class="dropdown"><a href="#"><span>차미리사 기념관</span> <i class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="#">1층</a></li>
+                                <li><a href="#">2층</a></li>
+                                <li><a href="{% url '차미리관 3층' %}">3층</a></li>
+                                <li><a href="#">4층</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="#"><span>인문사회관</span> <i class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="#">1층</a></li>
+                                <li><a href="#">2층</a></li>
+                                <li><a href="#">3층</a></li>
+                                <li><a href="#">4층</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="#"><span>자연관</span> <i class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="#">1층</a></li>
+                                <li><a href="#">2층</a></li>
+                                <li><a href="#">3층</a></li>
+                                <li><a href="#">4층</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="#"><span>대강의동</span> <i class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="#">1층</a></li>
+                                <li><a href="#">2층</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="/room/collegeAndFloor/"><span>Professor Consultation Reservation</span> <i
+                        class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li class="dropdown"><a href="#"><span>과학기술대학</span> <i class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="/stu/professors">컴퓨터공학과</a></li>
+                                <li><a href="#">사이버보안학과</a></li>
+                                <li><a href="#">식품영양학과</a></li>
+                                <li><a href="#">바이오공학과</a></li>
+                                <li><a href="#">생활체육학과</a></li>
+                                <li><a href="#">화학과</a></li>
+                                <li><a href="#">수학과</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="#"><span>글로벌융합대학</span> <i class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="#">국어국문학과</a></li>
+                                <li><a href="#">영어영문학과</a></li>
+                                <li><a href="#">경영학과</a></li>
+                                <li><a href="#">철학과</a></li>
+                                <li><a href="#">회계학과</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="nav-link scrollto" href="#">약학대학</a></li>
+
+                        <li class="dropdown"><a href="#"><span>Art & Desing 대학</span> <i
+                                class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                <li><a href="#">동양화전공</a></li>
+                                <li><a href="#">서양화전공</a></li>
+                                <li><a href="#">실내디자인전공</a></li>
+                                <li><a href="#">시각디자인전공</a></li>
+                                <li><a href="#">텍스타일디자인전공</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a class="nav-link scrollto" href="/board">Community</a></li>
+                <li><a class="nav-link scrollto active" href="{% url 'custom_logout' %}">Logout</a></li>
+                <li><a class="getstarted scrollto" href="/stu/my_page">MyPage</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
+    </div>
+</header><!-- End Header -->
+
+<main id="main">
+
+
+    <section class="inner-page">
+      <div class="container">
+          <br><br>
+        <p>
+
+          <div id='calendar'></div>
+        </p>
+      </div>
+    </section>
+
+
+
+<script>
+    var user_id = '{{ user_id }}';
+
+        function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    function getCurrentUserId() {
+        // Use Django's request object to get user_id from session
+        var user_id = '{{ request.user.id }}';  // Assuming user ID is stored in session
+        console.log("현재 사용자 ID:", user_id);
+        return user_id;
+    }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                },
+                editable: true,
+                navLinks: true,
+                dayMaxEvents: true,
+                selectable: true,
+                slotLabelFormat: {
+                    hour: 'numeric',
+                    minute: '2-digit',
+                    hour12: false
+                },
+                select: function (event) {
+                    let user_id = getCurrentUserId();
+                    console.log("현재 이벤트에 대한 사용자 ID:", user_id);
+                    let inputString = prompt("학생 번호와 빌리려는 강의실 호를 작성해주세요. ");
+                    if (inputString !== null && inputString.trim() !== "") {
+                        let selectedDate = event.startStr;
+
+                function getTimeInput() {
+                    let startTime = prompt(`시작 시간 입력 (HH:mm) for ${selectedDate}:`);
+                    let endTime = prompt(`끝나는 시간 입력 (HH:mm) for ${selectedDate}:`);
+
+                    try {
+                        startTime = new Date(`${selectedDate.split('T')[0]}T${startTime}`);
+                        endTime = new Date(`${selectedDate.split('T')[0]}T${endTime}`);
+
+                        if (!isNaN(startTime.getTime()) && !isNaN(endTime.getTime())) {
+                            const xhr = new XMLHttpRequest();
+                            xhr.onreadystatechange = function () {
+                                if (xhr.readyState === 4) {
+                                    if (xhr.status === 200) {
+                                        try {
+                                            const res = JSON.parse(xhr.responseText);
+                                            // Handle the response
+                                            if (res.result === "success" && res.eventId !== null && res.eventId !== "") {
+                                                console.log(user_id)
+                                                console.log("Event added successfully:", res);
+
+                                                calendar.addEvent({
+                                                    id: res.eventId,
+                                                    title: inputString,
+                                                    start: startTime,
+                                                    end: endTime,
+                                                });
+                                            } else {
+                                                console.error("스케줄 등록 실패 Server response:", res);
+                                            }
+                                        } catch (error) {
+                                            console.error("Error parsing JSON:", error);
+                                        }
+                                    } else {
+                                        console.error("Server error. Status code:", xhr.status);
+                                    }
+                                }
+                            };
+
+                            xhr.open("POST", '/room/set_all_day_event/');
+                            xhr.setRequestHeader('Content-Type', 'application/json');
+                            xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
+
+                            xhr.send(JSON.stringify({
+                                user_id: user_id,
+                                title: inputString,
+                                start: startTime.toISOString(),
+                                end: endTime.toISOString(),
+                                allDay: false,
+                            }));
+                        } else {
+                            alert("잘못된 시작 또는 종료 시간입니다. 다시 시도해주세요.");
+                        }
+                    } catch (error) {
+                        alert("잘못된 형식의 시간입니다. 다시 시도해주세요.");
+                    }
+                }
+
+
+                        getTimeInput();
+                    } else {
+                        alert("잘못된 학생 번호입니다. 다시 시도해주세요.");
+                    }
+                },
+                events: {
+                    url: '/room/get_events/',
+                    failure: function (e) {
+                        console.error("Failed to fetch events:", e);
+                        document.getElementById('script-warning').style.display = 'block';
+                    }
+                },
+            });
+
+            calendar.render();
+
+        });
+    </script>
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+
+       <section class="breadcrumbs">
+        <div class="container">
+
+
+        </div>
+    </section><!-- End Breadcrumbs Section -->
+
+
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-6 footer-contact">
+                    <h3>Duksung Women's University</h3>
+                    <p>
+                        01369|서울 도봉구 삼양로144길 33<br>
+                        (쌍문동, 덕성여자대학교)|덕성여자대학교<br><br>
+                        <strong>Phone:</strong> (ARS) 02-901-8000<br>
+                        <strong>Email:</strong> webmaster@duksung.ac.kr<br>
+                    </p>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="https://www.duksung.ac.kr/main.do">Duksung
+                            Homepage</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="https://lms.duksung.ac.kr/">Duksung
+                            E-class</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a
+                                href="https://sso.duksung.ac.kr/svc/tk/Auth.do?ac=Y&ifa=N&id=portal&">Duksung
+                            Potal</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/room/collegeAndFloor/">Rantal Lecture Room</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/stu/univ_and_major_list/">Professor Consultation Reservation</a>
+                        </li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/board">Community</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/stu/my_page">MyPage</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Duksung Social Networks</h4>
+                    <div class="social-links mt-3">
+                        <a class="blog" href="https://blog.naver.com/dswuniv_blog"><i class="bx bx-bold"></i></a>
+                        <a class="facebook" href="https://www.facebook.com/DukSungWU"><i
+                                class="bx bxl-facebook"></i></a>
+                        <a class="instagram" href="https://www.instagram.com/duksung_official/"><i
+                                class="bx bxl-instagram"></i></a>
+                        <a class="youtube" href="https://www.youtube.com/channel/UCrda7r7df_GPinyBULMA6CA"><i
+                                class="bx bxl-youtube"></i></a>
+                        <br><br><br>
+                        <p class="logo"><img alt="덕성여자대학교" height="40" src="{% static 'single_pages/assets/img/footer_logo.png' %}"
+                                             width="165"
+                        ></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</footer><!-- End Footer -->
+
+<a class="back-to-top d-flex align-items-center justify-content-center" href="/inner_page/"><i
+        class="bi bi-arrow-up-short"></i></a>
+<!--href 바꾸세요-->
+
+
+<!-- Vendor JS Files -->
+<script src="{% static 'single_pages/assets/vendor/aos/aos.js' %}"></script>
+<script src="{% static 'single_pages/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'single_pages/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+<script src="{% static 'single_pages/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+<script src="{% static 'single_pages/assets/vendor/php-email-form/validate.js' %}"></script>
+
+
+<!-- Template Main JS File -->
+<script src="{% static 'single_pages/assets/js/main.js' %}"></script>
+
+
+</body>
+
+</html>
