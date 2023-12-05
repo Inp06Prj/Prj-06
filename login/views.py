@@ -103,6 +103,7 @@ from .models import UserProfile, Reserve
 #     # context = {'user_profile': user_profile}
 #     return render(request, 'login/mypage.html', context)
 from room.models import Calendar as RoomCalendar  # Import Calendar model from the room app
+from room.models import Room
 
 @login_required(login_url='custom_login')
 def my_page(request):
@@ -120,6 +121,8 @@ def my_page(request):
     page_number_room = request.GET.get('page_room', 1)  # Change the parameter name
     paginator_room = Paginator(room_calendar_events, 4)  # Use the correct paginator for room_calendar_events
     page_obj_room = paginator_room.get_page(page_number_room)
+    # room = get_object_or_404(Room, pk=)
+    # room = Room.objects.all()
 
     professor = Pro_User.objects.all()
 
@@ -128,6 +131,7 @@ def my_page(request):
         'reservations': page_obj,
         'professor': professor,
         'room_calendar_events': page_obj_room,
+        # 'room': room,
     }
 
     return render(request, 'login/mypage.html', context)
@@ -148,27 +152,6 @@ def professor_list(request):
     professors = Pro_User.objects.filter(is_professor=True)
     return render(request, 'login/professor_list.html', {'professors': professors})
 
-
-# def univ_list(request) : #단과대 선택
-#     univ = Pro_User.objects.all()
-#
-#     return render(
-#         request,
-#         'login/univlist.html',
-#         {
-#             'univ':univ,
-#         }
-#     )
-# def univ_and_major(request):
-#     major, univ = UserProfile.objects.all()
-#     return render(
-#         request,
-#         'login/univ&major.html',
-#         {
-#             'univ': univ,
-#             'major': major,
-#         }
-#     )
 
 def univ_and_major(request):
     user_profile = UserProfile.objects.get(user=request.user)
