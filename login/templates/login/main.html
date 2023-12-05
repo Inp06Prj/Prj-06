@@ -52,26 +52,28 @@
 
 
         <!--        이건 누가 잘 로그인 했는지 알아보기 위해서 추가한 것 나중에 구현 마무리 단계에서 삭제할 예정-->
+
+        <h2><p style="font-size:12px;">
         {% if user %}
         {{ user.username }} -
         {% for stu_user in stu_users %}
         {% if user == stu_user.user %}
-        {{ stu_user.user_name }} 학생 환영합니다.
+        {{ stu_user.user_name }} 학생
         {% endif %}
         {% endfor %}
         {% endif %}
-
+        </p></h2>
 
         <nav class="navbar" id="navbar">
             <ul>
 
-                <li class="dropdown"><a href="#"><span>Rantal Lecture Room</span> <i class="bi bi-chevron-down"></i></a>
+                <li class="dropdown"><a href="/room/collegeAndFloor/"><span>Rantal Lecture Room</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li class="dropdown"><a href="#"><span>차미리사 기념관</span> <i class="bi bi-chevron-right"></i></a>
                             <ul>
                                 <li><a href="#">1층</a></li>
                                 <li><a href="#">2층</a></li>
-                                <li><a href="#">3층</a></li>
+                                <li><a href="{% url '차미리관 3층' %}">3층</a></li>
                                 <li><a href="#">4층</a></li>
                             </ul>
                         </li>
@@ -99,7 +101,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="dropdown"><a href="#"><span>Professor Consultation Reservation</span> <i
+                <li class="dropdown"><a href="/room/collegeAndFloor/"><span>Professor Consultation Reservation</span> <i
                         class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li class="dropdown"><a href="#"><span>과학기술대학</span> <i class="bi bi-chevron-right"></i></a>
@@ -165,7 +167,7 @@
                              class="img-fluid"
                              src="{% static 'single_pages/assets/img/roomimg.jpg' %}">
                     </ul>
-                    <a class="get-started-btn" href="#">Get Started</a>
+                    <a class="get-started-btn" href="/room/collegeAndFloor/">Get Started</a>
                 </div>
 
                 <div class="col-lg-4 box featured" data-aos="fade-up">
@@ -179,11 +181,11 @@
                 </div>
 
                 <div class="col-lg-4 box" data-aos="fade-left">
-                    <h3>마이페이지</h3>
+                    <h3>강의실 대여 커뮤니티</h3>
                     <ul>
-                        <img alt="" class="img-fluid" src="{% static 'single_pages/assets/img/mypageimg.png' %}">
+                        <img alt="" class="img-fluid" src="{% static 'single_pages/assets/img/커뮤니티.jpg' %}">
                     </ul>
-                    <a class="get-started-btn" href="/stu/my_page">Get Started</a>
+                    <a class="get-started-btn" href="/board">Get Started</a>
                 </div>
 
             </div>
@@ -234,8 +236,9 @@
                 <div class="col-lg-3 col-md-6 footer-links">
                     <h4>Our Services</h4>
                     <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Rantal Lecture Room</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Professor Consultation Reservation</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/room/collegeAndFloor/">Rantal Lecture Room</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/stu/univ_and_major_list/">Professor Consultation Reservation</a>
+                        </li>
                         <li><i class="bx bx-chevron-right"></i> <a href="/board">Community</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a href="/stu/my_page">MyPage</a></li>
                     </ul>

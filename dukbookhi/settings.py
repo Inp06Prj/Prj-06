@@ -26,12 +26,16 @@ SECRET_KEY = 'django-insecure-7l@c%he@scie9j__7-#%m)+3(k0mu9n0=wtzbo*(v!h7ov1si!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+
+    'corsheaders',
+    'django_extensions',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,7 +54,19 @@ LOGOUT_REDIRECT_URL = ''
 # AUTH_USER_MODEL = "login.stu_User"       # 커스텀 인증 모델
 
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",  # 클라이언트 도메인을 여기에 추가
+]
+GRAPH_MODELS = {
+    'all_applications' : False,
+    'group_models' : True,
+}
+
+
 MIDDLEWARE = [
+
+    'corsheaders.middleware.CorsMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

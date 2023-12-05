@@ -188,12 +188,6 @@
       <div class="logo">
         <h1><a href="/pro/pro_main">DukBookHi</a></h1>
       </div>
-      {% if user %}
-          {{ user.username }} -
-          {% with pro_user=request.user.pro_user %}
-              {{ pro_user.user_name }} 교수님
-          {% endwith %}
-      {% endif %}
 
       <nav id="navbar" class="navbar">
         <ul>

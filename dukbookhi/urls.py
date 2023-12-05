@@ -14,7 +14,7 @@ urlpatterns = [
     path('board/', include('board.urls')), # 게시판 기능 <- 학생만 접근 가능
 
     path('pro/', include('professor.urls')), # 교수님 로그인 기능 + 교수님 시간 예약 등 교수님의 정보
-    # path('room/', include('room.urls')),
+    path('room/', include('room.urls')),
     
 ]
 
