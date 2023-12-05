@@ -1,60 +1,4 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--    <title>차미리관 3층의 도면 혹은 강의실 목록</title>-->
-<!--    <style>-->
-<!--        .div1 {-->
-<!--            width: 300px;-->
-<!--            height: 100px;-->
-<!--            border: 1px solid blue;-->
-<!--            background-color: #384E80;-->
-<!--            margin-bottom: 10px;-->
-<!--            display: flex;-->
-<!--            align-items: center;-->
-<!--            justify-content: center;-->
-<!--            color: white;-->
-<!--            font-weight: bold;-->
-<!--            font-size: 1.2em;-->
-<!--        }-->
-
-<!--        .div1:hover {-->
-<!--            background-color: #0a5021;-->
-<!--        }-->
-<!--    </style>-->
-<!--</head>-->
-
-<!--<body>-->
-<!--    <h2>차미리관 3층의 도면 혹은 강의실 목록입니다</h2>-->
-
-<!--    {% for room in room_number %}-->
-<!--        <div class='div1' data-href="{% url 'reservation table' %}" onclick='divBtn();'>-->
-<!--            {{ room.room_number }}-->
-<!--        </div>-->
-<!--    {% endfor %}-->
-
-<!--    &lt;!&ndash; <ul>-->
-<!--        {% for room in lecture_rooms %}-->
-<!--            <li>{{ room.room_num }}</li>-->
-<!--        {% endfor %}-->
-<!--    </ul> &ndash;&gt;-->
-
-<!--    <script>-->
-<!--        function divBtn() {-->
-<!--            var div = document.querySelector('.div1');-->
-<!--            var href = div.getAttribute('data-href');-->
-<!--            if (href) {-->
-<!--                window.location.href = href;-->
-<!--            }-->
-<!--        }-->
-<!--    </script>-->
-<!--</body>-->
-<!--</html>-->
 <!DOCTYPE html>
-
-
 {% load static %}
 <html lang="en">
 
@@ -62,7 +6,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>덕북희 - 메인</title>
+    <title>덕북희 - 차미리사관 3층 강의실 리스트</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
