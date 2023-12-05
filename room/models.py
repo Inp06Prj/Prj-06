@@ -23,7 +23,7 @@ class Room(models.Model):
 
 
 class Calendar(models.Model):
-    # room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True)  # Add this line
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True)  # Add this line
     # student = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True, blank=True)  # ForeignKey로 변경
     student = models.ForeignKey('login.UserProfile', on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=100)  # 이벤트 제목

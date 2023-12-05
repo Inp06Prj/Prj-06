@@ -14,8 +14,8 @@ urlpatterns = [
     path('roomReservationTable/', views.room_reservation, name='reservation table'),
     path('get_events/', views.get_events, name='get_events'),
     path('set_all_day_event/', views.set_all_day_event, name='set_all_day_event'),
-    path('edit_event/<int:event_id>/', views.edit_event, name='edit_event'),
-    path('delete_event/<int:event_id>/', views.delete_schedule, name='delete_schedule'),
+    # path('edit_event/<int:event_id>/', views.edit_reservation, name='edit_reservation'),
+    # path('delete_event/<int:event_id>/', views.delete_reservation, name='delete_reservation'),
 
 
 
