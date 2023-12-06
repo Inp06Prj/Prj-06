@@ -33,7 +33,13 @@
 
     <!-- Template Main CSS File -->
     <link href="{% static 'single_pages/assets/css/style.css' %}" rel="stylesheet">
+    <style>
+      .testimonials .testimonial-item {
+          max-width: 50%; /* Set the maximum width to 50% of the container */
+          margin: 0 auto; /* Center the element horizontally */
+      }
 
+    </style>
 </head>
 
 <body>
@@ -100,12 +106,12 @@
               <li><i class="bx bx-home"></i> 사무실 : {{ pro_user.office_building}} - {{pro_user.office_room_number}}호</li>
             </ul>
 
-          </div>
+          </div><br><br>
 
           <div class="col-lg-4 " data-aos="fade-left">
             </div>
 
-        </div>
+        </div><br><br>
 
       </div>
     </section><!-- End Pricing Section -->
@@ -145,6 +151,7 @@
                                     </form>
                                 {% endif %}
                             </div>
+                            <br><br>
                         {% endfor %}
                         <!-- Pagination -->
                         <nav aria-label="Page navigation">
