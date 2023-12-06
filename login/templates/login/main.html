@@ -46,24 +46,7 @@
 
         <div class="logo">
             <h1><a href="/stu/main">DukBookHi</a></h1>
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
         </div>
-
-
-        <!--        이건 누가 잘 로그인 했는지 알아보기 위해서 추가한 것 나중에 구현 마무리 단계에서 삭제할 예정-->
-
-        <h2><p style="font-size:12px;">
-        {% if user %}
-        {{ user.username }} -
-        {% for stu_user in stu_users %}
-        {% if user == stu_user.user %}
-        {{ stu_user.user_name }} 학생
-        {% endif %}
-        {% endfor %}
-        {% endif %}
-        </p></h2>
-
         <nav class="navbar" id="navbar">
             <ul>
 
@@ -197,14 +180,6 @@
 
 <!-- ======= Footer ======= -->
 <footer id="footer">
-
-<!--    <section class="breadcrumbs">-->
-<!--        <div class="container">-->
-
-
-<!--        </div>-->
-<!--    </section>&lt;!&ndash; End Breadcrumbs Section &ndash;&gt;-->
-
     <div class="footer-top">
         <div class="container">
             <div class="row">

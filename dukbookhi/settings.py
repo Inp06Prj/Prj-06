@@ -48,10 +48,7 @@ INSTALLED_APPS = [
 ]
 
 LOGIN_URL = 'login/'          # 로그인 URL
-# LOGIN_REDIRECT_URL = '/main'  # 로그인 후 URL
-# LOGOUT_REDIRECT_URL = 'login/'            # 로그아웃 후 URL
 LOGOUT_REDIRECT_URL = ''
-# AUTH_USER_MODEL = "login.stu_User"       # 커스텀 인증 모델
 
 
 CORS_ALLOWED_ORIGINS = [

@@ -91,93 +91,88 @@
 
             <div class="logo">
                 <h1><a href="/stu/main/">DukBookHi</a></h1>
-                <!-- Uncomment below if you prefer to use an image logo -->
-                <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
             </div>
-  <nav class="navbar" id="navbar">
-            <ul>
-
-                <li class="dropdown"><a href="/room/collegeAndFloor/"><span>Rantal Lecture Room</span> <i
-                        class="bi bi-chevron-down"></i></a>
-                    <ul>
-                        <li class="dropdown"><a href="#"><span>차미리사 기념관</span> <i
-                                class="bi bi-chevron-right"></i></a>
-                            <ul>
-                                <li><a href="#">1층</a></li>
-                                <li><a href="#">2층</a></li>
-                                <li><a href="{% url '차미리관 3층' %}">3층</a></li>
-                                <li><a href="#">4층</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown"><a href="#"><span>인문사회관</span> <i class="bi bi-chevron-right"></i></a>
-                            <ul>
-                                <li><a href="#">1층</a></li>
-                                <li><a href="#">2층</a></li>
-                                <li><a href="#">3층</a></li>
-                                <li><a href="#">4층</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown"><a href="#"><span>자연관</span> <i class="bi bi-chevron-right"></i></a>
-                            <ul>
-                                <li><a href="#">1층</a></li>
-                                <li><a href="#">2층</a></li>
-                                <li><a href="#">3층</a></li>
-                                <li><a href="#">4층</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown"><a href="#"><span>대강의동</span> <i class="bi bi-chevron-right"></i></a>
-                            <ul>
-                                <li><a href="#">1층</a></li>
-                                <li><a href="#">2층</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown"><a href="/stu/univ_and_major_list"><span>Professor Consultation Reservation</span> <i
-                        class="bi bi-chevron-down"></i></a>
-                    <ul>
-                        <li class="dropdown"><a href="#"><span>과학기술대학</span> <i class="bi bi-chevron-right"></i></a>
-                            <ul>
-                                <li><a href="/stu/professors/">컴퓨터공학과</a></li>
-                                <li><a href="#">사이버보안학과</a></li>
-                                <li><a href="#">식품영양학과</a></li>
-                                <li><a href="#">바이오공학과</a></li>
-                                <li><a href="#">생활체육학과</a></li>
-                                <li><a href="#">화학과</a></li>
-                                <li><a href="#">수학과</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown"><a href="#"><span>글로벌융합대학</span> <i class="bi bi-chevron-right"></i></a>
-                            <ul>
-                                <li><a href="#">국어국문학과</a></li>
-                                <li><a href="#">영어영문학과</a></li>
-                                <li><a href="#">경영학과</a></li>
-                                <li><a href="#">철학과</a></li>
-                                <li><a href="#">회계학과</a></li>
-                            </ul>
-                        </li>
-                        <li><a class="nav-link scrollto" href="#faq">약학대학</a></li>
-                        <li class="dropdown"><a href="#"><span>Art & Desing 대학</span> <i class="bi bi-chevron-right"></i></a>
-                            <ul>
-                                <li><a href="#">동양화전공</a></li>
-                                <li><a href="#">서양화전공</a></li>
-                                <li><a href="#">실내디자인전공</a></li>
-                                <li><a href="#">시각디자인전공</a></li>
-                                <li><a href="#">텍스타일디자인전공</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-
-            </ul>
-            <ul>
-                <li><a class="nav-link scrollto" href="/board">Community</a></li>
-                <li><a class="nav-link scrollto active" href="{% url 'custom_logout' %}">Logout</a></li>
-                <li><a class="getstarted scrollto" href="/stu/my_page">MyPage</a></li>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-
+            <nav class="navbar" id="navbar">
+                <ul>
+                    <li class="dropdown"><a href="/room/collegeAndFloor/"><span>Rantal Lecture Room</span> <i
+                            class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li class="dropdown"><a href="#"><span>차미리사 기념관</span> <i
+                                    class="bi bi-chevron-right"></i></a>
+                                <ul>
+                                    <li><a href="#">1층</a></li>
+                                    <li><a href="#">2층</a></li>
+                                    <li><a href="{% url '차미리관 3층' %}">3층</a></li>
+                                    <li><a href="#">4층</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a href="#"><span>인문사회관</span> <i class="bi bi-chevron-right"></i></a>
+                                <ul>
+                                    <li><a href="#">1층</a></li>
+                                    <li><a href="#">2층</a></li>
+                                    <li><a href="#">3층</a></li>
+                                    <li><a href="#">4층</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a href="#"><span>자연관</span> <i class="bi bi-chevron-right"></i></a>
+                                <ul>
+                                    <li><a href="#">1층</a></li>
+                                    <li><a href="#">2층</a></li>
+                                    <li><a href="#">3층</a></li>
+                                    <li><a href="#">4층</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a href="#"><span>대강의동</span> <i class="bi bi-chevron-right"></i></a>
+                                <ul>
+                                    <li><a href="#">1층</a></li>
+                                    <li><a href="#">2층</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="/stu/univ_and_major_list"><span>Professor Consultation Reservation</span> <i
+                            class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li class="dropdown"><a href="#"><span>과학기술대학</span> <i class="bi bi-chevron-right"></i></a>
+                                <ul>
+                                    <li><a href="/stu/professors/">컴퓨터공학과</a></li>
+                                    <li><a href="#">사이버보안학과</a></li>
+                                    <li><a href="#">식품영양학과</a></li>
+                                    <li><a href="#">바이오공학과</a></li>
+                                    <li><a href="#">생활체육학과</a></li>
+                                    <li><a href="#">화학과</a></li>
+                                    <li><a href="#">수학과</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a href="#"><span>글로벌융합대학</span> <i class="bi bi-chevron-right"></i></a>
+                                <ul>
+                                    <li><a href="#">국어국문학과</a></li>
+                                    <li><a href="#">영어영문학과</a></li>
+                                    <li><a href="#">경영학과</a></li>
+                                    <li><a href="#">철학과</a></li>
+                                    <li><a href="#">회계학과</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="nav-link scrollto" href="#faq">약학대학</a></li>
+                            <li class="dropdown"><a href="#"><span>Art & Desing 대학</span> <i class="bi bi-chevron-right"></i></a>
+                                <ul>
+                                    <li><a href="#">동양화전공</a></li>
+                                    <li><a href="#">서양화전공</a></li>
+                                    <li><a href="#">실내디자인전공</a></li>
+                                    <li><a href="#">시각디자인전공</a></li>
+                                    <li><a href="#">텍스타일디자인전공</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li><a class="nav-link scrollto" href="/board">Community</a></li>
+                    <li><a class="nav-link scrollto active" href="{% url 'custom_logout' %}">Logout</a></li>
+                    <li><a class="getstarted scrollto" href="/stu/my_page">MyPage</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
         </div>
     </header><!-- End Header -->
 
@@ -319,15 +314,6 @@
 
     <!-- ======= Footer ======= -->
     <footer id="footer">
-
-<!--        <section class="breadcrumbs">-->
-<!--            <div class="container">-->
-
-
-
-<!--            </div>-->
-<!--        </section>&lt;!&ndash; End Breadcrumbs Section &ndash;&gt;-->
-
         <div class="footer-top">
             <div class="container">
                 <div class="row">

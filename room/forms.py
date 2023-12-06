@@ -2,19 +2,7 @@ from django import forms
 from .models import RoomReservation, Calendar
 from login.models import UserProfile
 
-# class RoomReservationForm(forms.ModelForm):
-#     class Meta:
-#         model = RoomReservation
-#         fields = ['student', 'room', 'start_time', 'end_time']
-#
-#     def clean(self):
-#         cleaned_data = super().clean()
-#         start_time = cleaned_data.get('start_time')
-#         end_time = cleaned_data.get('end_time')
-#
-#         # Your custom validation logic here
-#
-#         return cleaned_data
+
 class RoomReservationForm(forms.ModelForm):
     class Meta:
         model = RoomReservation

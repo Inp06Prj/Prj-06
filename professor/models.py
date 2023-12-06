@@ -25,8 +25,6 @@ class Pro_User(models.Model):
         # 나중에 더 추가할 예정 (이 기능이 실제로 구현된다고 하면)
     ]
 
-    # id_number = models.CharField(max_length=10, unique=True)
-    # password = models.CharField(max_length=128)
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
