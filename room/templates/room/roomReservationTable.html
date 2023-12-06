@@ -194,7 +194,7 @@
                 select: function (event) {
                     let user_id = getCurrentUserId();
                     console.log("현재 이벤트에 대한 사용자 ID:", user_id);
-                    let inputString = prompt("학생 번호와 빌리려는 강의실 호를 작성해주세요. ");
+                    let inputString = prompt("학생 번호와 빌리려는 강의실 호를 작성해주세요. ex) 20220000 - 차미리사관 319호");
                     if (inputString !== null && inputString.trim() !== "") {
                         let selectedDate = event.startStr;
 
