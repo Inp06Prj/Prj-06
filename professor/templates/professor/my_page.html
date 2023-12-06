@@ -218,21 +218,6 @@
             var reservationId = $(this).data('reservation-id');
             updateReservationStatus(reservationId, 'rejected');
         });
-
-<!--        // 예약 상태 업데이트 함수-->
-<!--        function updateReservationStatus(reservationId, newStatus) {-->
-<!--            $.ajax({-->
-<!--                url: '/update_reservation_status/' + reservationId + '/' + newStatus + '/',-->
-<!--                type: 'POST',-->
-<!--                success: function () {-->
-<!--                    // 업데이트 성공 시 페이지 새로고침-->
-<!--                    location.reload();-->
-<!--                },-->
-<!--                error: function () {-->
-<!--                    alert('상태 업데이트에 실패했습니다.');-->
-<!--                }-->
-<!--            });-->
-<!--        }-->
     });
 </script>
 
@@ -301,9 +286,8 @@
 
 </footer><!-- End Footer -->
 
-<a class="back-to-top d-flex align-items-center justify-content-center" href="/pro_mypage/"><i
+<a class="back-to-top d-flex align-items-center justify-content-center" href="#"><i
         class="bi bi-arrow-up-short"></i></a>
-<!--href 바꾸세요-->
 
 
 <!-- Vendor JS Files -->

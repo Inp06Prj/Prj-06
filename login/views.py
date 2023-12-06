@@ -9,6 +9,9 @@ from django.urls import reverse
 
 from django.contrib.auth.models import Group
 from room.models import RoomReservation, Calendar
+from .models import UserProfile, Reserve
+from room.models import Calendar as RoomCalendar
+from room.models import Room
 
 def custom_login(request):
     if request.user.is_authenticated:
@@ -58,53 +61,6 @@ def main_view(request):
         return redirect(reverse('custom_login'))
 
 
-from .models import UserProfile, Reserve
-
-
-# @login_required(login_url='custom_login')
-# def my_page(request):
-#     user = request.user
-#     user_profile, created = UserProfile.objects.get_or_create(user=user)
-#
-#     # 여름님 코드
-#     reservations = Reserve.objects.filter(student=user_profile).order_by('date')
-#
-#     # Add pagination to the reservations
-#     page_number = request.GET.get('page', 1)
-#     paginator = Paginator(reservations, 4)  # Show 10 reservations per page
-#     page_obj = paginator.get_page(page_number)
-#
-#     professor = Pro_User.objects.all()
-#     context = {'user_profile': user_profile, 'reservations': page_obj, 'professor': professor}
-#
-#     # context = {'user_profile': user_profile}
-#     return render(request, 'login/mypage.html', context)
-# @login_required(login_url='custom_login')
-# def my_page(request):
-#     user = request.user
-#     user_profile, created = UserProfile.objects.get_or_create(user=user)
-#
-#     # 여름님 코드
-#     reservations = Reserve.objects.filter(student=user_profile).order_by('date')
-#
-#     # Add pagination to the reservations
-#     page_number = request.GET.get('page', 1)
-#     paginator = Paginator(reservations, 4)  # Show 10 reservations per page
-#     page_obj = paginator.get_page(page_number)
-#
-#     professor = Pro_User.objects.all()
-#
-#     # 추가: room 앱에서 예약 정보를 가져오기
-#     room_reservations = RoomReservation.objects.filter(student=user_profile).order_by('start_time')
-#
-#     context = {'user_profile': user_profile, 'reservations': page_obj, 'professor': professor,
-#                'room_reservations': room_reservations}
-#
-#     # context = {'user_profile': user_profile}
-#     return render(request, 'login/mypage.html', context)
-from room.models import Calendar as RoomCalendar  # Import Calendar model from the room app
-from room.models import Room
-
 @login_required(login_url='custom_login')
 def my_page(request):
     user = request.user
@@ -121,8 +77,6 @@ def my_page(request):
     page_number_room = request.GET.get('page_room', 1)  # Change the parameter name
     paginator_room = Paginator(room_calendar_events, 4)  # Use the correct paginator for room_calendar_events
     page_obj_room = paginator_room.get_page(page_number_room)
-    # room = get_object_or_404(Room, pk=)
-    # room = Room.objects.all()
 
     professor = Pro_User.objects.all()
 
