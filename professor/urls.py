@@ -2,6 +2,7 @@ from django.urls import path
 from .views import pro_login, pro_logout, pro_main_view
 from . import views
 
+# 황민지
 urlpatterns = [
     path('pro_login/', pro_login, name='pro_login'),
     path('pro_logout/', pro_logout, name='pro_logout'),

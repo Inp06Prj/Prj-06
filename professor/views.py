@@ -1,12 +1,10 @@
 from datetime import date
-
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import JsonResponse, HttpResponseNotFound, HttpResponseBadRequest, HttpResponseNotAllowed
 from .models import Calendar
 import json
 from .forms import CalendarEditForm
-
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import Group
@@ -17,6 +15,8 @@ from .models import Pro_User
 
 from login.models import UserProfile, Reserve
 
+
+# 황민지
 def pro_login(request):
     if request.user.is_authenticated:
         return redirect(reverse(pro_main_view))
@@ -26,9 +26,7 @@ def pro_login(request):
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
-
             user = form.get_user()
-
             if user is not None:
                 # Check group membership
                 professor_group = Group.objects.get(name='Professor')
@@ -47,12 +45,14 @@ def pro_login(request):
     return render(request, 'professor/login.html', {'form': form})
 
 
+# 황민지
 def pro_logout(request):
     logout(request)
     messages.success(request, '(교수) 로그아웃 되었습니다.')
     return redirect(reverse('pro_login'))
 
 
+# 황민지
 def pro_main_view(request):
     pro_users = Pro_User.objects.order_by('-pk')
 
@@ -68,6 +68,7 @@ def pro_main_view(request):
         return redirect(reverse('pro_login'))
 
 
+# 황민지&김여름
 def my_page(request):
     if request.user.is_authenticated:
         # 교수 정보 가져오기
@@ -86,6 +87,7 @@ def my_page(request):
         return redirect(reverse('pro_login'))
 
 
+# 황민지
 # 교수님이 따로 자신의 스케줄을 등록
 def schedule_index(request):
     # 오늘날짜구함
@@ -102,6 +104,7 @@ def schedule_index(request):
         return redirect(reverse('pro_login'))
 
 
+# 황민지
 def get_events(request):
     if request.user.is_authenticated:
         start_date = request.GET.get('start')
@@ -118,6 +121,7 @@ def get_events(request):
         return redirect(reverse('pro_login'))
 
 
+# 황민지
 # 학생들한테 교수님의 스케줄 보내주려고 만들었음...
 def get_professor_events(request, professor_id):
     try:
@@ -128,6 +132,7 @@ def get_professor_events(request, professor_id):
         return HttpResponseBadRequest("Invalid professor ID")
 
 
+# 황민지
 def set_all_day_event(request):
     if request.user.is_authenticated:
         pro_user = Pro_User.objects.get(user=request.user)
@@ -139,6 +144,7 @@ def set_all_day_event(request):
         return redirect(reverse('pro_login'))
 
 
+# 황민지
 def edit_event(request, event_id):
     calendar_event = get_object_or_404(Calendar, id=event_id)
     if request.method == 'POST':
@@ -154,6 +160,7 @@ def edit_event(request, event_id):
     return render(request, 'professor/edit_event.html', {'form': form, 'event': calendar_event})
 
 
+# 황민지
 def delete_schedule(request, event_id):
     if request.user.is_authenticated:
         calendar_event = get_object_or_404(Calendar, id=event_id)
@@ -168,6 +175,7 @@ def delete_schedule(request, event_id):
         return redirect(reverse('pro_login'))
 
 
+# 김여름
 def update_reservation_status(request, reservation_id, new_status): #수락/거절
     if request.method == 'POST':
         reservation = get_object_or_404(Reserve, pk=reservation_id)

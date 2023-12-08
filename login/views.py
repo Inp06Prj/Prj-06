@@ -13,6 +13,8 @@ from .models import UserProfile, Reserve
 from room.models import Calendar as RoomCalendar
 from room.models import Room
 
+
+# 황민지
 def custom_login(request):
     if request.user.is_authenticated:
         return redirect(reverse('main'))
@@ -42,12 +44,14 @@ def custom_login(request):
     return render(request, 'login/login.html', {'form': form})
 
 
+# 황민지
 def custom_logout(request):
     logout(request)
     messages.success(request, '(학생) 로그아웃 되었습니다.')
     return redirect(reverse('custom_login'))  # 여기서 'main'은 당신이 메인 페이지 URL 패턴에 지정한 이름입니다.
 
 
+# 황민지
 def main_view(request):
     stu_users = UserProfile.objects.order_by('-pk')
     context = {'stu_users': stu_users}
@@ -61,6 +65,7 @@ def main_view(request):
         return redirect(reverse('custom_login'))
 
 
+# 황민지&김여름
 @login_required(login_url='custom_login')
 def my_page(request):
     user = request.user
@@ -74,8 +79,8 @@ def my_page(request):
 
     # Fetch Calendar events from the room app
     room_calendar_events = RoomCalendar.objects.filter(student=user_profile).order_by('start')
-    page_number_room = request.GET.get('page_room', 1)  # Change the parameter name
-    paginator_room = Paginator(room_calendar_events, 4)  # Use the correct paginator for room_calendar_events
+    page_number_room = request.GET.get('page_room', 1)
+    paginator_room = Paginator(room_calendar_events, 4)
     page_obj_room = paginator_room.get_page(page_number_room)
 
     professor = Pro_User.objects.all()
@@ -87,7 +92,6 @@ def my_page(request):
         'room_calendar_events': page_obj_room,
         # 'room': room,
     }
-
     return render(request, 'login/mypage.html', context)
 
 
@@ -95,6 +99,7 @@ def my_page(request):
 from professor.models import Pro_User, Calendar
 
 
+# 황민지
 def professor_schedule(request, professor_id):
     professor = get_object_or_404(Pro_User, pk=professor_id)
     schedule = Calendar.objects.filter(user=professor).values('id', 'title', 'start', 'end')
@@ -102,11 +107,13 @@ def professor_schedule(request, professor_id):
     return render(request, 'login/professor_schedule.html', {'professor': professor, 'schedule': schedule})
 
 
+# 김여름
 def professor_list(request):
     professors = Pro_User.objects.filter(is_professor=True)
     return render(request, 'login/professor_list.html', {'professors': professors})
 
 
+# 김여름
 def univ_and_major(request):
     user_profile = UserProfile.objects.get(user=request.user)
     major = user_profile.major
@@ -122,7 +129,7 @@ def univ_and_major(request):
     )
 
 
-
+# 김여름
 def create_reservation(request, professor_id):
     if request.method == 'POST':
         student = request.user.userprofile

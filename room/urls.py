@@ -2,6 +2,7 @@ from django.urls import path
 # from .views import CollegeAndFloorView, RoomNumView, RoomReservationTableView
 from . import views
 
+# 오수연
 urlpatterns = [
     path('collegeAndFloor/', views.college_and_floor, name='choice college&floor'),
     path('cha3/', views.cha3, name='차미리관 3층'),

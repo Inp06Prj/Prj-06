@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User, Group
 
 
+# 황민지
 class Pro_User(models.Model):
     UNIV_OFFICE_CHOICES = [
         ('약학대학', '약학대학'),
@@ -47,6 +48,7 @@ class Pro_User(models.Model):
          return f'[{self.major}] {self.user_name}(교수) {self.office_building} - {self.office_room_number}'
 
 
+# 황민지
 class Calendar(models.Model):
     user = models.ForeignKey(Pro_User, on_delete=models.CASCADE) # 사용자 (Pro_User 테이블의 PK)
     title = models.CharField(max_length=100) # 이벤트 제목

@@ -4,6 +4,7 @@ from django.conf import settings
 from django.utils import timezone
 
 
+# 황민지
 class Board(models.Model):
     """
     title: 제목
@@ -23,6 +24,7 @@ class Board(models.Model):
         return self.title
 
 
+# 황민지
 class Reply(models.Model):
     """
         reply: Reply -> Board 연결관계
