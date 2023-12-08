@@ -3,6 +3,7 @@ from .models import RoomReservation, Calendar
 from login.models import UserProfile
 
 
+# 오수연
 class RoomReservationForm(forms.ModelForm):
     class Meta:
         model = RoomReservation
@@ -29,6 +30,7 @@ class RoomReservationForm(forms.ModelForm):
 
 
 
+# 오수연
 class CalendarEditForm(forms.ModelForm):
     class Meta:
         model = Calendar

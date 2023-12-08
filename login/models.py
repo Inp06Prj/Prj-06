@@ -9,6 +9,7 @@ from django.dispatch import receiver
 #from professor.models import Pro_User
 
 
+# 황민지
 class UserProfile(models.Model):
     UNIV_CHOICES = [
         ('약학대학', '약학대학'),
@@ -47,6 +48,7 @@ class UserProfile(models.Model):
         return f'[{self.major}] {self.user.username} - {self.user_name}(학생)'
 
 
+# 김여름
 class Reserve(models.Model):
     student = models.ForeignKey('login.UserProfile', related_name='login_reserve_requested', on_delete=models.CASCADE)
     professor = models.ForeignKey('professor.Pro_User', related_name='professor_reserve_received', on_delete=models.CASCADE)
@@ -66,6 +68,7 @@ class Reserve(models.Model):
 from professor.models import Calendar
 
 
+# 김여름
 @receiver(pre_save, sender=Reserve)
 def update_calendar_on_accepted(sender, instance, **kwargs):
 

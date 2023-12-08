@@ -5,29 +5,32 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.urls import reverse
 from django.core.paginator import Paginator
-
 from .models import Board
 from django.contrib.auth.decorators import login_required
 
 
-def index(request):
-    all_boards = Board.objects.all().order_by('-pk') # 모든 데이터 조회, 내림차순(-표시) 조회
-    paginator = Paginator(all_boards, 7)
-    page = int(request.GET.get('page', 1))
-    board_list = paginator.get_page(page)
-    return render(request, 'board/index.html', {'title':'Board List', 'board_list':board_list})
+# # 황민지
+# def index(request):
+#     all_boards = Board.objects.all().order_by('-pk') # 모든 데이터 조회, 내림차순(-표시) 조회
+#     paginator = Paginator(all_boards, 7)
+#     page = int(request.GET.get('page', 1))
+#     board_list = paginator.get_page(page)
+#     return render(request, 'board/index.html', {'title':'Board List', 'board_list':board_list})
 
 
+# 황민지
 def detail(request, board_id):
     board = Board.objects.get(id=board_id)
     return render(request, 'board/detail.html', {'board': board})
 
 
+# 황민지
 def write(request):
     return render(request, 'board/write.html')
 # write: 게시글 목록에서 "글쓰기" 버튼 클릭 시 쓰기 페이지 이동
 
 
+# 황민지
 def write_board(request):
     # 로그인되어 있는지 확인
     if request.user.is_authenticated:
@@ -41,9 +44,8 @@ def write_board(request):
         return HttpResponseRedirect(reverse('custom_login'))  # 또는 로그인 페이지로 리다이렉트하거나 다른 처리를 수행하세요.
 
 
-
+# 황민지
 @login_required(login_url='/login')
-# -> 이거 쓰면 댓글(로그인X)경우 에러 메세지 안뜨고 다시 로그인 화면으로 가긴 함;;
 def create_reply(request, board_id):
     board = Board.objects.get(id=board_id)
 
@@ -60,6 +62,7 @@ def create_reply(request, board_id):
     return HttpResponseRedirect(reverse('board:detail', args=(board_id,)))
 
 
+# 황민지
 @login_required(login_url='/login')
 def delete_board(request, board_id):
     board = get_object_or_404(Board, id=board_id)
@@ -74,6 +77,7 @@ def delete_board(request, board_id):
     return redirect('board:index')
 
 
+# 황민지
 @login_required(login_url='/login')
 def edit_board(request, board_id):
     board = get_object_or_404(Board, id=board_id)
@@ -94,7 +98,9 @@ def edit_board(request, board_id):
 from django.db.models import Q
 
 
+# 황민지
 def index(request):
+    # 검색 기능!
     search_query = request.GET.get('q', '')
 
     if search_query:

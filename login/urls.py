@@ -2,6 +2,8 @@ from django.urls import path
 from .views import custom_login, custom_logout, main_view, professor_list, professor_schedule
 from . import views
 
+# 황민지&김여름
+
 urlpatterns = [
     # 학생들한테 보여지는 페이지들
     

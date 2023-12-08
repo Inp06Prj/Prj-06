@@ -14,6 +14,7 @@ from django.urls import reverse
 from login.models import UserProfile
 
 
+# 오수연
 def college_and_floor(request):
     rooms = Room.objects.all()
     building_floors = {}
@@ -35,6 +36,7 @@ def college_and_floor(request):
     )
 
 
+# 오수연
 def cha3(request):
     room_number = Room.objects.filter(building='차미리사관', floor=3)
 
@@ -45,6 +47,7 @@ def cha3(request):
     )
 
 
+# 황민지&오수연
 @login_required
 def room_reservation(request):
     if request.method == 'POST':
@@ -72,7 +75,7 @@ def room_reservation(request):
     return render(request, 'room/roomReservationTable.html', {'form': form})
 
 
-
+# 황민지&오수연
 def get_events(request):
     start_date = request.GET.get('start')
     end_date = request.GET.get('end')
@@ -87,6 +90,7 @@ def get_events(request):
     return JsonResponse(data, safe=False)
 
 
+# 오수연
 def set_all_day_event(request):
     if request.user.is_authenticated:
         try:
@@ -112,6 +116,7 @@ def set_all_day_event(request):
         return JsonResponse({"error": "User not authenticated"}, status=403)
 
 
+# 황민지
 def get_current_user(request):
     # 여기에서 사용자 정보를 가져오는 로직을 추가합니다.
     # 예시: 현재 로그인된 사용자의 정보를 JSON으로 반환

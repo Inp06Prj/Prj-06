@@ -1,6 +1,8 @@
 from django.urls import path
-
 from . import views
+
+
+# 황민지 작성
 
 app_name = 'board'
 urlpatterns = [

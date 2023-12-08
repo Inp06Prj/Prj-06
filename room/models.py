@@ -5,6 +5,7 @@ from django.utils import timezone
 from login.models import UserProfile
 
 
+# 오수연
 class Room(models.Model):
     BUILDING_CHOICES = [
         ('약학대학', '약학대학'),
@@ -22,6 +23,7 @@ class Room(models.Model):
         return f'{self.building} - Floor {self.floor}, Room {self.room_number}'
 
 
+# 황민지&오수연
 class Calendar(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True)  # Add this line
     # student = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True, blank=True)  # ForeignKey로 변경
@@ -39,6 +41,7 @@ class Calendar(models.Model):
         return f'{self.student.user_name if self.student and self.student.user else "Unknown User"} - {self.title} - {start_str} to {end_str}'
 
 
+# 오수연
 class RoomReservation(models.Model):
     student = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='room_reservations')
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
