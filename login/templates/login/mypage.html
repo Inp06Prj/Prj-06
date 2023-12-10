@@ -238,9 +238,14 @@
 
                                 {% if reservations.has_next %}
                                     <li class="page-item">
-                                        <a class="page-link" href="?page={{ room_calendar_events.next_page_number }}" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
+                                           {% if room_calendar_events.has_next %}
+                                                <a class="page-link" href="?page={{ room_calendar_events.next_page_number }}" aria-label="Next">
+                                                 <span aria-hidden="true">>></span>
+                                                </a>
+                                           {% endif %}
+
+<!--                                        <span aria-hidden="true">&raquo;</span>-->
+<!--                                        </a>-->
                                     </li>
                                     <li class="page-item">
                                         <a class="page-link" href="?page={{ room_calendar_events.paginator.num_pages }}" aria-label="Last">
